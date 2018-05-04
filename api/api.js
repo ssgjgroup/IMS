@@ -207,6 +207,7 @@ const url = {
     updateOperType: baseUrl + 'vue/siteCenter/updateOperate.do',
     updatePriorityType: baseUrl + 'vue/siteCenter/updatePriority.do',
     updateAllocateUser: baseUrl + 'vue/siteCenter/updateAllocateUser.do',
+    exportPmisData: baseUrl + 'vue/siteCenter/exportPmisData.do',
     imagePath: imageUrl + 'shareFolder' //图片路径
   },
   //楼层问题
