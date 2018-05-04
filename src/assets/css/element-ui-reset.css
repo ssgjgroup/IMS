@@ -1,0 +1,20 @@
+/*reset*/
+.el-menu{
+  border-right:none;
+}
+/*pagination*/
+.el-pager li{
+  color :#666;
+  font-weight: normal;
+}
+.el-pager li.active{
+  color :#3a9eff;
+}
+
+/*用upload模拟图片墙，隐藏上传和删除功能*/
+.enlargeImg .el-upload.el-upload--picture-card{
+  display: none;
+}
+.enlargeImg span.el-upload-list__item-delete{
+  display: none !important;
+}

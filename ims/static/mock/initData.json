@@ -1,0 +1,81 @@
+{
+  "data":{
+    "clinicalDiagnosis":[
+      { "label":"临床诊断","value":"1"}
+    ],
+    "inspectionArea":[
+      { "label":"胸部","value":"12"},
+      { "label":"腰椎","value":"胸部"},
+      { "label":"膝关节","value":"膝关节"},
+      { "label":"骨盆","value":"骨盆"},
+      { "label":"颈椎","value":"颈椎"}
+    ],
+    "imageQuality":[
+      { "label":"图像质量","value":"1"}
+    ],
+    "saveFigure":[
+      { "label":"存图","value":"1"}
+    ],
+    "instrumentModel":[
+      { "label":"仪器型号","value":"1"}
+    ],
+    "frequency":[
+      { "label":"3.5-10mhz","value":"1"}
+    ]
+  },
+  "tableData":[
+    {
+      "name": "李晓",
+      "age": "23",
+      "sex": "女",
+      "state":"未审核",
+      "count":"0"
+    },
+    {
+      "name": "李家俊",
+      "age": "23",
+      "sex": "男",
+      "state":"未审核",
+      "count":"0"
+    },
+    {
+      "name": "王梦雨",
+      "age": "23",
+      "sex": "男",
+      "state":"未审核",
+      "count":"0"
+    },
+    {
+      "name": "程阳",
+      "age": "23",
+      "sex": "男",
+      "state":"未审核",
+      "count":"0"
+    },
+    {
+      "name": "王小虎",
+      "age": "23",
+      "sex": "男",
+      "state":"未审核",
+      "count":"0"
+    },
+    {
+      "name": "张一龙",
+      "age": "23",
+      "sex": "男",
+      "state":"未审核",
+      "count":"0"
+    },
+    {
+      "name": "乌托邦",
+      "age": "23",
+      "sex": "男",
+      "state":"未审核",
+      "count":"0"
+    }],
+  "failtCode":"",
+  "link":"",
+  "message":"",
+  "messageCode":"",
+  "type":"SUCCESS"
+}
