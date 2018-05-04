@@ -17,15 +17,18 @@
           style="width: 100%">
           <el-table-column
             prop="map.plName"
-            label="系统名称">
+            label="系统名称"
+            width="100px">
           </el-table-column>
           <el-table-column
             prop="hwName"
-            label="硬件名称">
+            label="硬件名称"
+            width="150px">
           </el-table-column>
           <el-table-column
             prop="brand"
-            label="推荐品牌">
+            label="最低参数"
+             width="200px">
           </el-table-column>
           <el-table-column
             prop="model"
@@ -127,7 +130,7 @@
         <el-form-item label="硬件名称" prop="hwName" label-width="80px">
           <el-input v-model="workForm.hwName"></el-input>
         </el-form-item>
-        <el-form-item label="推荐品牌" prop="brand" label-width="80px">
+        <el-form-item label="最低参数" prop="brand" label-width="80px">
           <el-input v-model="workForm.brand"></el-input>
         </el-form-item>
         <el-form-item label="推荐型号" prop="model" label-width="80px">
@@ -235,7 +238,7 @@
         rules: {
           plId: {required: true, message: '请选择系统名称', trigger: 'change'},
           hwName: {required: true, message: '请输入硬件名称', trigger: 'blur'},
-          brand: {required: true, message: '请输入推荐品牌', trigger: 'blur'},
+          brand: {required: true, message: '请输入最低参数', trigger: 'blur'},
           model: {required: true, message: '请输入推荐型号', trigger: 'blur'},
           useContent: {required: true, message: '请输入用途', trigger: 'blur'},
           //isScope: {required: true, message: '请选择本期范围', trigger: 'blur'},
