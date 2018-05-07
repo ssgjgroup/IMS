@@ -150,7 +150,8 @@
                 <i class="iconfont icon-edit" @click="openAddAndModifyWindow(scope.row)"
                    v-show="showCol(scope.row)"></i>
                 <i class="iconfont icon-question" @click="picShowOpen(scope.row)"></i>
-                <i class="iconfont icon-delete" @click="doDelete(scope.row.id)" v-show="!isActive&&showCol(scope.row)"></i>
+                <i class="iconfont icon-delete" @click="doDelete(scope.row.id)"
+                   v-show="!isActive&&showCol(scope.row)"></i>
               </div>
             </template>
           </el-table-column>
@@ -225,16 +226,6 @@
     </el-dialog>
 
     <!--图片-弹窗-->
-    <!--<el-dialog width="50%"-->
-    <!--class="commond-img"-->
-    <!--:visible.sync="picShow">-->
-    <!--<el-carousel class="slideImge">-->
-    <!--<el-carousel-item v-for="(item,index) in imgPath" :key="index">-->
-    <!--<img v-bind:src="item"/>-->
-    <!--</el-carousel-item>-->
-    <!--</el-carousel>-->
-    <!--</el-dialog>-->
-
     <el-dialog width="50%" class="enlargeImg" :visible.sync="picShow">
       <el-upload
         action=""
@@ -259,6 +250,7 @@
         :on-remove="handleRemove"
         :on-success="uploadSeccess"
         :before-remove="beforeRemove"
+        :before-upload="beforeUpload"
         :limit="1"
         :on-exceed="handleExceed"
         :file-list="fileList"
@@ -441,7 +433,7 @@
           if (imgData.length > 0) {
             for (let i = 0; i < imgData.length; i++) {
               this.imgPath[i] = {
-                url: api.url.report.imagePath+imgData[i],
+                url: api.url.report.imagePath + imgData[i],
                 name: imgData[i].substring(imgData[i].lastIndexOf('/') + 1, imgData[i].lastIndexOf('.'))
               };
             }
@@ -610,13 +602,12 @@
         this.uploadWindow = true;
       },
       beforeUpload(file) {
-        var reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = function () {
-          // this.upLoadData.id = this.result;
-          // console.log(this.action);
-          // console.log(this.result);
-        };
+        console.info(file.name.substring(file.name.lastIndexOf(".") + 1));
+        const isJPG = file.name.substring(file.name.lastIndexOf(".") + 1) === 'png' || file.name.substring(file.name.lastIndexOf(".") + 1) === 'jpg' || file.name.substring(file.name.lastIndexOf(".") + 1) === 'bmp'||file.name.substring(file.name.lastIndexOf(".") + 1) === 'jpeg';
+        if (!isJPG) {
+          this.$message.error('只能上传图片格式!');
+        }
+        return isJPG;
       },
       handlePreview(file) {
         console.log(file);

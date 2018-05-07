@@ -14,11 +14,11 @@ const ENCRYPTION_FLAG = false;
 
 //const baseUrl = debugMod ? "http://127.0.0.1:9087/NC/" : "http://172.16.0.129:9078/NC/";//服务器
 //阿里云
-// const baseUrl = debugMod ? "http://localhost:8081/ssgjm/" : "http://47.97.170.21:8081/ssgjm/";//服务器
-// const imageUrl = "http://47.97.170.21:8081/";//服务器
+const baseUrl = debugMod ? "http://localhost:8081/ssgjm/" : "http://47.97.170.21:8081/ssgjm/";//服务器
+const imageUrl = "http://47.97.170.21:8081/";//服务器
 //公司
-const baseUrl = debugMod ? "http://localhost:8081/ssgjm/" : "http://203.110.176.176:8081/ssgjm/";//服务器
-const imageUrl = "http://203.110.176.176:8081/";//服务器
+// const baseUrl = debugMod ? "http://localhost:8081/ssgjm/" : "http://203.110.176.176:8081/ssgjm/";//服务器
+// const imageUrl = "http://203.110.176.176:8081/";//服务器
 
 const mockUrl = process.env.NODE_ENV === 'production' ?
   config.build.assetsPublicPath + config.build.assetsSubDirectory :

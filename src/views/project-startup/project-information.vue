@@ -493,79 +493,79 @@
             </div>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="上线支持人员" name="seventh">
-          <div class="w-table">
-            <div class="w-table-btn">
-              <span @click="confirmOnLineUser" :class="{ active:onlineActive }"><i
-                class="iconfont icon-conf-complete"></i>确认完成</span>
-              <span @click="openEtOnlineUserWindow"><i class="iconfont icon-new-add"></i>新增</span>
-              <span @click="openLineUploadWindow"><i class="iconfont icon-to-lead"></i>导入</span>
-              <span @click="downloadExcelLineUser"><i class="iconfont icon-export"></i>导出</span>
-            </div>
-            <div class="w-table-content">
-              <el-table
-                :data="etOnlineInfo"
-                style="width: 100%">
-                <el-table-column
-                  prop="userCode"
-                  label="工号">
-                </el-table-column>
-                <el-table-column
-                  prop="cName"
-                  label="姓名">
-                </el-table-column>
-                <el-table-column
-                  prop="roleName"
-                  label="角色">
-                </el-table-column>
-                <el-table-column
-                  prop="responseDept"
-                  label="部门">
-                </el-table-column>
-                <el-table-column
-                  prop="responseSite"
-                  label="站点">
-                </el-table-column>
-                <el-table-column
-                  prop="telephone"
-                  label="电话">
-                </el-table-column>
-                <el-table-column
-                  prop="wechatNo"
-                  label="微信号">
-                </el-table-column>
-                <el-table-column
-                  prop="email"
-                  label="邮箱">
-                </el-table-column>
-                <el-table-column
-                  prop="lodging"
-                  label="住宿信息">
-                </el-table-column>
-                <el-table-column
-                  label="操作">
-                  <template slot-scope="scope">
-                    <div class="operate">
-                      <i class="iconfont icon-edit" @click="openLineUserDetails(scope.row)"></i>
-                      <i class="iconfont icon-delete" @click="deleteEtOnlineUsetInfoDetails(scope.row.id)"></i>
-                    </div>
-                  </template>
-                </el-table-column>
-              </el-table>
-            </div>
-            <div class="w-table-page">
-              <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage"
-                :page-sizes="[10, 20, 30, 40]"
-                :page-size="pageSize"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="total">
-              </el-pagination>
-            </div>
-          </div>
-        </el-tab-pane>
+        <!--<el-tab-pane label="上线支持人员" name="seventh">-->
+          <!--<div class="w-table">-->
+            <!--<div class="w-table-btn">-->
+              <!--<span @click="confirmOnLineUser" :class="{ active:onlineActive }"><i-->
+                <!--class="iconfont icon-conf-complete"></i>确认完成</span>-->
+              <!--<span @click="openEtOnlineUserWindow"><i class="iconfont icon-new-add"></i>新增</span>-->
+              <!--<span @click="openLineUploadWindow"><i class="iconfont icon-to-lead"></i>导入</span>-->
+              <!--<span @click="downloadExcelLineUser"><i class="iconfont icon-export"></i>导出</span>-->
+            <!--</div>-->
+            <!--<div class="w-table-content">-->
+              <!--<el-table-->
+                <!--:data="etOnlineInfo"-->
+                <!--style="width: 100%">-->
+                <!--<el-table-column-->
+                  <!--prop="userCode"-->
+                  <!--label="工号">-->
+                <!--</el-table-column>-->
+                <!--<el-table-column-->
+                  <!--prop="cName"-->
+                  <!--label="姓名">-->
+                <!--</el-table-column>-->
+                <!--<el-table-column-->
+                  <!--prop="roleName"-->
+                  <!--label="角色">-->
+                <!--</el-table-column>-->
+                <!--<el-table-column-->
+                  <!--prop="responseDept"-->
+                  <!--label="部门">-->
+                <!--</el-table-column>-->
+                <!--<el-table-column-->
+                  <!--prop="responseSite"-->
+                  <!--label="站点">-->
+                <!--</el-table-column>-->
+                <!--<el-table-column-->
+                  <!--prop="telephone"-->
+                  <!--label="电话">-->
+                <!--</el-table-column>-->
+                <!--<el-table-column-->
+                  <!--prop="wechatNo"-->
+                  <!--label="微信号">-->
+                <!--</el-table-column>-->
+                <!--<el-table-column-->
+                  <!--prop="email"-->
+                  <!--label="邮箱">-->
+                <!--</el-table-column>-->
+                <!--<el-table-column-->
+                  <!--prop="lodging"-->
+                  <!--label="住宿信息">-->
+                <!--</el-table-column>-->
+                <!--<el-table-column-->
+                  <!--label="操作">-->
+                  <!--<template slot-scope="scope">-->
+                    <!--<div class="operate">-->
+                      <!--<i class="iconfont icon-edit" @click="openLineUserDetails(scope.row)"></i>-->
+                      <!--<i class="iconfont icon-delete" @click="deleteEtOnlineUsetInfoDetails(scope.row.id)"></i>-->
+                    <!--</div>-->
+                  <!--</template>-->
+                <!--</el-table-column>-->
+              <!--</el-table>-->
+            <!--</div>-->
+            <!--<div class="w-table-page">-->
+              <!--<el-pagination-->
+                <!--@size-change="handleSizeChange"-->
+                <!--@current-change="handleCurrentChange"-->
+                <!--:current-page="currentPage"-->
+                <!--:page-sizes="[10, 20, 30, 40]"-->
+                <!--:page-size="pageSize"-->
+                <!--layout="total, sizes, prev, pager, next, jumper"-->
+                <!--:total="total">-->
+              <!--</el-pagination>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</el-tab-pane>-->
       </el-tabs>
     </div>
 

@@ -29,6 +29,8 @@ const easyDataReference = r => require.ensure([], () => r(require('../views/impl
 const easyDataCheck = r => require.ensure([], () => r(require('../views/implement-work/easy-data-check.vue')), 'easyDataCheck');
 //项目上线
 const  projectOnline = r => require.ensure([], () => r(require('../views/implement-work/project-online-approval.vue')), 'projectOnline');
+//上线支持人员
+const  onlineSupportStaff = r => require.ensure([], () => r(require('../views/implement-work/online-support-staff.vue')), 'onlineSupportStaff');
 //工作汇报
 const commondCenterArrange = r => require.ensure([], () => r(require('../views/work-report/commond-center-arrange.vue')), 'commondCenterArrange');
 //楼层问题
@@ -119,6 +121,11 @@ const routes = [
     path: '/2-8',
     name: 'projectOnline',
     component: projectOnline
+  },
+  {
+    path: '/2-9',
+    name: 'onlineSupportStaff',
+    component: onlineSupportStaff
   },
   {
     path: '/3-1',
