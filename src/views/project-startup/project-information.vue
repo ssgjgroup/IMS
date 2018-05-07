@@ -472,7 +472,7 @@
                 <el-table-column
                   label="操作">
                   <template slot-scope="scope">
-                    <div class="operate">
+                    <div class="operate" v-show="scope.row.isDel != -1">
                       <i class="iconfont icon-edit" @click="openEtUsetInfoDetails(scope.row)"></i>
                       <i class="iconfont icon-delete" @click="deleteEtUsetInfoDetails(scope.row.id)"></i>
                     </div>
