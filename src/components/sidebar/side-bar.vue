@@ -48,6 +48,7 @@
         <el-menu-item index="2-6">单据报表开发</el-menu-item>
         <el-menu-item index="2-7">工作站点安装</el-menu-item>
         <el-menu-item index="2-8">项目上线审批</el-menu-item>
+        <el-menu-item index="2-9">上线支持人员</el-menu-item>
       </el-submenu>
       <el-submenu index="3">
         <template slot="title">
