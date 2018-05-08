@@ -214,7 +214,7 @@
           plId: {required: true, message: '请选择系统名称', trigger: 'change'},
           hwName: {required: true, message: '请输入硬件名称', trigger: 'blur'},
           brand: {required: true, message: '请输入最低参数', trigger: 'blur'},
-          model: {required: true, message: '请输入推荐型号', trigger: 'blur'},
+          // model: {required: true, message: '请输入推荐型号', trigger: 'blur'},
           useContent: {required: true, message: '请输入用途', trigger: 'blur'},
           //isScope: {required: true, message: '请选择本期范围', trigger: 'blur'},
         },
