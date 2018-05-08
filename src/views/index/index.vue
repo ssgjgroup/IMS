@@ -40,44 +40,74 @@
                 initData2: {},
                 initData3: {},
                 backgroundData:['','','','',''],
-                graphicData:[
-                  {
-                    text:'开始',
-                    state:'state2'
-                  },
-                  {
-                      text:'项目接单',
-                      state:'state2'
-                  },
-                  {
-                    text:'完善项目信息',
-                    state:'state2'
-                  },
-                  {
-                    text:'硬件清单准备',
-                    state:'state2'
-                  },
-                  {
-                    text:'入场准备',
-                    state:'state2'
-                  },
-                  {
-                    text:'实施计划制定',
-                    state:'state2'
-                  },
-                  {
-                    text:'测试环境搭建',
-                    state:'state2'
-                  },
-                  {
-                    text:'确认项目范围',
-                    state:'state2'
-                  },
-                  {
-                    text:'项目启动',
-                    state:'state2'
-                  }
-                ],
+              graphicData:[
+                {
+                  text:'项目经理已完成工作',
+                  state:'state'
+                },
+                {
+                  text:'项目经理未完成工作',
+                  state:'state'
+                },
+                {
+                  text:'实施人员已完成工作',
+                  state:'state'
+                },
+                {
+                  text:'实施人员未完成工作',
+                  state:'state'
+                },
+                {
+                  text:'项目经理完成且异常工作',
+                  state:'state'
+                },
+                {
+                  text:'实施人员完成且异常工作',
+                  state:'state'
+                },
+                {
+                  text:'正在进行实施工作',
+                  state:'state'
+                }
+              ],
+              lineData0:[
+                {
+                  text:'开始',
+                  state:'state2'
+                },
+                {
+                  text:'项目接单',
+                  state:'state2'
+                },
+                {
+                  text:'完善项目信息',
+                  state:'state2'
+                },
+                {
+                  text:'硬件清单准备',
+                  state:'state2'
+                },
+                {
+                  text:'入场准备',
+                  state:'state2'
+                },
+                {
+                  text:'实施计划制定',
+                  state:'state2'
+                },
+                {
+                  text:'测试环境搭建',
+                  state:'state2'
+                },
+                {
+                  text:'确认项目范围',
+                  state:'state2'
+                },
+                {
+                  text:'项目启动',
+                  state:'state2'
+                }
+              ],
                 lineData:[
                   {
                     className:'line2',
@@ -206,13 +236,14 @@
               });
             this.getStartData();
             this.$parent.setSelectDisable(false);
+            this.$parent.setProjectInfo();
           })
         },
 
         methods: {
           getStartData:function () {
             if(this.$parent.getProjectId()==""||this.$parent.getProjectId()==null || this.$parent.getProjectId()=='undefined'){
-              this.initData = this.graphicData;
+              this.initData = this.lineData0;
               this.initData2 = this.lineData;
               this.initData3 = this.lineBtmData;
             }else{

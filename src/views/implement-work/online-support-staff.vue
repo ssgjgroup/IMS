@@ -97,7 +97,7 @@
           </el-select>
         </el-form-item>
         <!--<el-form-item label="部门" label-width="60px" prop="responseDept">-->
-          <!--<el-input v-model="etOnlineUserForm.responseDept" auto-complete="off"></el-input>-->
+        <!--<el-input v-model="etOnlineUserForm.responseDept" auto-complete="off"></el-input>-->
         <!--</el-form-item>-->
         <el-form-item label="角色" label-width="60px" prop="roleName">
           <el-input v-model="etOnlineUserForm.roleName" auto-complete="off"></el-input>
@@ -166,8 +166,8 @@
         pageSize: 10,
         total: 100,
         currentPage: 1,
-        deptList:[],//科室
-        responseDept:"",//科室id
+        deptList: [],//科室
+        responseDept: "",//科室id
         rules: {
           userCode: [
             {required: true, message: '请输入用户工号'},
@@ -252,7 +252,7 @@
           //console.log(data);
           this.etOnlineInfo = data.rows;
           this.total = data.total;
-          this.deptList=data.deptList;
+          this.deptList = data.deptList;
         });
       },
       //上传成功
@@ -324,7 +324,7 @@
         this.etOnlineUserForm.mobile = data.mobile;
         this.etOnlineUserForm.lodging = data.lodging;
         this.title = "修改";
-        this.responseDept=data.responseDept;
+        this.responseDept = data.responseDept;
         this.etOnlineUserWindow = true;
       },
       openEtOnlineUserWindow: function () {
@@ -341,18 +341,21 @@
         this.etOnlineUserForm.wechatNo = '';
         this.etOnlineUserForm.lodging = '';
         this.etOnlineUserForm.email = '';
-        this.responseDept="";
+        this.responseDept = "";
         this.etOnlineUserWindow = true;
       },
       //选择科室
       doSelect(responseDept) {
         this.etOnlineUserForm.responseDept = responseDept;
-        this.responseDept=responseDept;
+        this.responseDept = responseDept;
       },
       openLineUploadWindow: function () {
         this.fileList = [];
         this.uploadWindow = true;
-        this.action = api.url.etOnlineUserInfo.uploadFile + '?pmId=' + this.$parent.getProjectId() + '&operator=' + this.$parent.getUserId();
+        this.action = api.url.etOnlineUserInfo.uploadFile
+          + '?pmId=' + this.$parent.getProjectId()
+          + '&operator=' + this.$parent.getUserId()
+          + '&serialNo='+this.$parent.getCustomerId();
       },
       onlineAddOrModify: function (formName) { //增加或者修改数据
         var json = {
