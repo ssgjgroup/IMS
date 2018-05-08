@@ -42,124 +42,132 @@
                 backgroundData:['','','','',''],
                 graphicData:[
                   {
-                      text:'项目经理已完成工作',
-                      state:'state'
+                    text:'开始',
+                    state:'state2'
                   },
                   {
-                    text:'项目经理未完成工作',
-                    state:'state'
+                      text:'项目接单',
+                      state:'state2'
                   },
                   {
-                    text:'实施人员已完成工作',
-                    state:'state'
+                    text:'完善项目信息',
+                    state:'state2'
                   },
                   {
-                    text:'实施人员未完成工作',
-                    state:'state'
+                    text:'硬件清单准备',
+                    state:'state2'
                   },
                   {
-                    text:'项目经理完成且异常工作',
-                    state:'state'
+                    text:'入场准备',
+                    state:'state2'
                   },
                   {
-                    text:'实施人员完成且异常工作',
-                    state:'state'
+                    text:'实施计划制定',
+                    state:'state2'
                   },
                   {
-                    text:'正在进行实施工作',
-                    state:'state'
+                    text:'测试环境搭建',
+                    state:'state2'
+                  },
+                  {
+                    text:'确认项目范围',
+                    state:'state2'
+                  },
+                  {
+                    text:'项目启动',
+                    state:'state2'
                   }
                 ],
                 lineData:[
                   {
                     className:'line2',
                     text:'模拟系统运行',
-                    state:'state1',
+                    state:'state4',
                   },
                   {
                     className:'line2',
                     text:'',
-                    state:'state-null',
+                    state:'state4',
                   },
                   {
                     className:'line2',
                     text:'培训客户&考核',
-                    state:'state1',
+                    state:'state4',
                   },
                   {
                     className:'line2',
                     text:'安装站点软硬件',
-                    state:'state1',
+                    state:'state4',
                   },
                   {
                     className:'line2',
                     text:'',
-                    state:'state-null',
+                    state:'state4',
                   },
                   {
                     className:'line2',
                     text:'',
-                    state:'state-null',
+                    state:'state4',
                   },
                   {
                     className:'line2',
                     text:'检验易用数据',
-                    state:'state1',
+                    state:'state4',
                   },
                   {
                     className:'line2',
                     text:'检验基础数据',
-                    state:'state1',
+                    state:'state4',
                   },
                   {
                     className:'line2',
                     text:'维护基础数据',
-                    state:'state1',
+                    state:'state4',
                   },
                   {
                     className:'line2',
                     text:'维护易用数据',
-                    state:'state1',
+                    state:'state4',
                   },
                   {
                     className:'line2',
                     text:'调研流程&配置',
-                    state:'state1',
+                    state:'state4',
                   },
                   {
                     className:'line2',
                     text:'开发接口&交付',
-                    state:'state1',
+                    state:'state4',
                   },
                   {
                     className:'line2',
                     text:'单据报表&交付',
-                    state:'state1',
+                    state:'state4',
                   },
                   {
                     className:'line2',
                     text:'数据维护',
-                    state:'state7',
+                    state:'state4',
                   },
                   {
                     className:'line2',
                     text:'确认流程数量',
-                    state:'state7',
+                    state:'state4',
                   },
                   {
                     className:'line2',
                     text:'确认接口数量',
-                    state:'state7',
+                    state:'state4',
                   },
                   {
                     className:'line2',
                     text:'确认硬件数量',
-                    state:'state7',
+                    state:'state4',
                   },
                   {
                     className:'line2',
                     text:'确认数据报表数量',
-                    state:'state7',
+                    state:'state4',
                   }
                 ],
                 lineBtmData:[
@@ -203,15 +211,21 @@
 
         methods: {
           getStartData:function () {
+            if(this.$parent.getProjectId()==""||this.$parent.getProjectId()==null || this.$parent.getProjectId()=='undefined'){
+              this.initData = this.graphicData;
+              this.initData2 = this.lineData;
+              this.initData3 = this.lineBtmData;
+            }else{
               api.post(api.url.projectInfo.initData,{
                 'pm_id':this.$parent.getProjectId()
               }).then((data)=>{
-                //console.log(data.result);
                 this.initData = data.result;
                 this.initData2 = data.result_two;
                 this.initData3 = data.result_Three;
-               // return data;
+                // return data;
               })
+            }
+
           }
             // getUserName: function () {
             //   api.post(api.url.projectInfo.testUrl,{}).then(() => {
