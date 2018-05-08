@@ -220,31 +220,13 @@
         currentPage: 1,
         businessProcessData:[
           {
-              flowCode:'WN-YWCL-01-01',
-              flowName:'分诊叫号接口',
+              flowCode:'',
+              flowName:'',
               isScope:'1',
-              stateTxt:'审核不通过',
+              stateTxt:'',
               map:{
                 stateClass:'disaudit'
               }
-          },
-          {
-            flowCode:'HIS/心电图',
-            flowName:'医技申请、报告',
-            isScope:'1',
-            stateTxt:'审核通过',
-            map:{
-              stateClass:'audited'
-            }
-          },
-          {
-            flowCode:'HIS/心电图',
-            flowName:'医技申请、报告',
-            isScope:'1',
-            stateTxt:'待审核',
-            map:{
-              stateClass:'audit'
-            }
           }
         ],
         /*弹窗数据*/

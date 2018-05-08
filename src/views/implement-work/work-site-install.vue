@@ -401,11 +401,11 @@
       return {
         installTableData:[
           {
-            deptName:'挂号处',
-          needSoftware:'选项2',
+            deptName:'',
+          needSoftware:'',
           needHardware:{
-            printer:['激光'],
-            desktop:['台式机'],
+            printer:[''],
+            desktop:[''],
             moreScreen:[],
             ticker:[],
             cardReader:[]
@@ -416,8 +416,8 @@
             },
           currentScope:'',
           assignedTo:'',
-          siteNumber:6,
-          stateTxt:'已安装',
+          siteNumber:0,
+          stateTxt:'',
           stateClass:'installed'
         }
         ],
@@ -512,8 +512,8 @@
         total: 100,
         currentPage: 1,
         imgPaths:[
-          {name: 'bootstrap.docx',
-            url: 'http://47.97.170.21:8081/shareFolder/simulate/simulate_1523410080077/Bootstrap.docx'}
+          {name: '',
+            url: ''}
         ],
 
         pageForm:{
