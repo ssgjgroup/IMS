@@ -144,10 +144,10 @@
                   prop="typeName"
                   label="科室分类">
                 </el-table-column>
-                <el-table-column
-                  prop="deptCode"
-                  label="科室编码">
-                </el-table-column>
+                <!--<el-table-column-->
+                  <!--prop="deptCode"-->
+                  <!--label="科室编码">-->
+                <!--</el-table-column>-->
                 <el-table-column
                   prop="deptName"
                   label="科室名称">
@@ -796,17 +796,17 @@
         fileList: [],
         initData: {},
         projectForm: {
-          pmCode: '100534',
-          pmName: '北京西路HIS',
-          custom: '上海市儿童医院',
+          pmCode: '',
+          pmName: '',
+          custom: '',
           junior: '',
-          bed: '12000',
-          location: '10',
-          locationLabel: '上海市',
+          bed: '',
+          location: '',
+          locationLabel: '',
           feature: '',
-          hopital: '5',
-          hopitalLabel: '三甲等级',
-          outpatient: '980'
+          hopital: '',
+          hopitalLabel: '',
+          outpatient: ''
         },
         activeName: 'zero',
         workerInfo: [],

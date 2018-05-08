@@ -247,10 +247,10 @@
         },
         fileInfo: { //上传文件信息
           id: 0,
-          name: 'bootstrap.docx',
-          url: 'http://47.97.170.21:8081/shareFolder/simulate/simulate_1523410080077/Bootstrap.docx',
-          userName: '陈世杰',
-          operDate: '2018-04-17'
+          name: '',
+          url: '',
+          userName: '',
+          operDate: ''
         },
         mockData: [], //模拟运行数据
         uploadWindow: false, //上传文件框参数
@@ -275,9 +275,9 @@
           }
         ],
         uploadWindow: false,
-        itemData: ['基础数据', '业务流程', '单据准备', '报表准备', '接口准备', '易用数据'],
-        completeData: [120, 50, 451, 134, 190, 80],
-        failData: [320, 332, 100, 334, 390, 330],
+        itemData: [],
+        completeData: [],
+        failData: [],
         onlineFile: [], //上线可行性报告
         onLineWindow: false,
         switchAction:api.url.onLineReport.upload,

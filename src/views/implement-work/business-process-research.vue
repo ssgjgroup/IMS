@@ -197,24 +197,6 @@ export default {
           map: {
             stateClass: 'disaudit'
           }
-        },
-        {
-          flowCode: 'HIS/心电图',
-          flowName: '医技申请、报告',
-          isScope: '1',
-          stateTxt: '审核通过',
-          map: {
-            stateClass: 'audited'
-          }
-        },
-        {
-          flowCode: 'HIS/心电图',
-          flowName: '医技申请、报告',
-          isScope: '1',
-          stateTxt: '待审核',
-          map: {
-            stateClass: 'audit'
-          }
         }
       ],
       /*弹窗数据*/
