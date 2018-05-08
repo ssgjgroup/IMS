@@ -1,81 +1,143 @@
 {
-  "data":{
-    "clinicalDiagnosis":[
-      { "label":"临床诊断","value":"1"}
-    ],
-    "inspectionArea":[
-      { "label":"胸部","value":"12"},
-      { "label":"腰椎","value":"胸部"},
-      { "label":"膝关节","value":"膝关节"},
-      { "label":"骨盆","value":"骨盆"},
-      { "label":"颈椎","value":"颈椎"}
-    ],
-    "imageQuality":[
-      { "label":"图像质量","value":"1"}
-    ],
-    "saveFigure":[
-      { "label":"存图","value":"1"}
-    ],
-    "instrumentModel":[
-      { "label":"仪器型号","value":"1"}
-    ],
-    "frequency":[
-      { "label":"3.5-10mhz","value":"1"}
-    ]
-  },
-  "tableData":[
+  "result": [
     {
-      "name": "李晓",
-      "age": "23",
-      "sex": "女",
-      "state":"未审核",
-      "count":"0"
+      "state": "state1",
+      "text": "开始"
     },
     {
-      "name": "李家俊",
-      "age": "23",
-      "sex": "男",
-      "state":"未审核",
-      "count":"0"
+      "state": "state1",
+      "text": "项目接单"
     },
     {
-      "name": "王梦雨",
-      "age": "23",
-      "sex": "男",
-      "state":"未审核",
-      "count":"0"
+      "state": "state1",
+      "text": "完善项目信息"
     },
     {
-      "name": "程阳",
-      "age": "23",
-      "sex": "男",
-      "state":"未审核",
-      "count":"0"
+      "state": "state1",
+      "text": "硬件清单准备"
     },
     {
-      "name": "王小虎",
-      "age": "23",
-      "sex": "男",
-      "state":"未审核",
-      "count":"0"
+      "state": "state1",
+      "text": "入场准备"
     },
     {
-      "name": "张一龙",
-      "age": "23",
-      "sex": "男",
-      "state":"未审核",
-      "count":"0"
+      "state": "state1",
+      "text": "确认项目范围"
     },
     {
-      "name": "乌托邦",
-      "age": "23",
-      "sex": "男",
-      "state":"未审核",
-      "count":"0"
-    }],
+      "state": "state5",
+      "text": "测试环境搭建"
+    },
+    {
+      "state": "state1",
+      "text": "实施计划制"
+    },
+    {
+      "state": "state1",
+      "text": "项目启动"
+    }
+  ],
+  "result_two": [
+    {
+      "state": "state3",
+      "text": "模拟系统运行"
+    },
+    {
+      "state": "state4",
+      "text": ""
+    },
+    {
+      "state": "state3",
+      "text": "培训客户&考核"
+    },
+    {
+      "state": "state3",
+      "text": "安装站点软硬件"
+    },
+    {
+      "state": "state4",
+      "text": ""
+    },
+    {
+      "state": "state4",
+      "text": ""
+    },
+    {
+      "state": "state3",
+      "text": "检验易用数据"
+    },
+    {
+      "state": "state3",
+      "text": "检验基础数据"
+    },
+    {
+      "state": "state4",
+      "text": "维护基础数据"
+    },
+    {
+      "state": "state4",
+      "text": "维护易用数据"
+    },
+    {
+      "state": "state3",
+      "text": "调研流程&配置"
+    },
+    {
+      "state": "state3",
+      "text": "开发接口&交付"
+    },
+    {
+      "state": "state3",
+      "text": "单据报表&交付"
+    },
+    {
+      "state": "state4",
+      "text": "数据维护"
+    },
+    {
+      "state": "state3",
+      "text": "确认流程数量"
+    },
+    {
+      "state": "state3",
+      "text": "确认接口数量"
+    },
+    {
+      "state": "state3",
+      "text": "确认硬件数量"
+    },
+    {
+      "state": "state3",
+      "text": "确认数据报表数量"
+    }
+  ],
+  "result_Three": [
+    {
+      "state": "state3",
+      "text": "评估上线可行性"
+    },
+    {
+      "state": "state3",
+      "text": "审批切换方案"
+    },
+    {
+      "state": "state4",
+      "text": "安排人员到岗"
+    },
+    {
+      "state": "state4",
+      "text": "切换项目"
+    },
+    {
+      "state": "state3",
+      "text": "结束"
+    }
+  ],
   "failtCode":"",
+  "funName":"",
   "link":"",
   "message":"",
   "messageCode":"",
+  "requstUrl":"",
   "type":"SUCCESS"
 }

@@ -1,0 +1,80 @@
+/*针对1366分辨率处理适配*/
+.index-container{
+  max-width: 1129px;
+}
+.graphic{
+  margin: 10px auto;
+}
+.index-content{
+  width: 1129px !important;
+}
+.graphic span{
+  margin: 12px 20px 0px 0px !important;
+}
+.index-bg01{
+  background-image:  url('../image/1366_01.png')
+}
+.index-bg02{
+  background-image:  url('../image/1366_02.png');
+}
+.index-bg03{
+  background-image:  url('../image/1366_03.png');
+}
+.index-bg04{
+  background-image:  url('../image/1366_04.png');
+}
+.index-bg05{
+  height: 134px!important;
+  background-image:  url('../image/1366_05.png');
+}
+.index-content>div.line1 span{
+  top:61px
+}
+.index-content>div.line3 span{
+  top: 37px
+}
+/*锚点定位*/
+.line1{
+  top: 0px;
+  height: 163px;
+}
+.line1-1{ left: 45px }
+.line1-2{ left: 200px }
+.line1-3{ left: 318px }
+.line1-4{ left: 596px }
+.line1-5{ right: 600px }
+.line1-6{ right: 287px;top:7px!important}
+.line1-7{ right: 287px;top:60px!important}
+.line1-8{ right: 292px;top:110px!important}
+.line1-9{ right: 35px }
+.line2{
+  top: 180px;
+  height: 367px;
+}
+.line2-1{ top: 226px;left: 24px; }
+.line2-2{ top:226px; left: 130px }
+.line2-3{ top:150px; left: 203px }
+.line2-4{ top:308px; left: 204px }
+.line2-5{ top:151px; left: 381px }
+.line2-6{ top:46px; left: 433px }
+.line2-7{ top:17px; left: 500px }
+.line2-8{ top:73px; left: 500px }
+.line2-9{ top:17px; left: 634px }
+.line2-10{ top:73px; left: 634px }
+.line2-11{ top:129px; right: 419px }
+.line2-12{ top:190px; right: 419px }
+.line2-13{ top:249px; left: 627px }
+.line2-14{ top:46px; right: 228px }
+.line2-15{ top:131px; left: 833px }
+.line2-16{ top:191px; left: 834px }
+.line2-17{ top:250px; right: 220px }
+.line2-18{ top:307px; right: 207px }
+.line3{
+  bottom: 0px;
+  height: 105px;
+}
+.line3-1{ left: 205px }
+.line3-2{ left: 593px }
+.line3-3{ right: 661px }
+.line3-4{ right: 266px }
+.line3-5{ right: 42px }

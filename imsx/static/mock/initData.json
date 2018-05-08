@@ -1,0 +1,143 @@
+{
+  "result": [
+    {
+      "state": "state1",
+      "text": "开始"
+    },
+    {
+      "state": "state1",
+      "text": "项目接单"
+    },
+    {
+      "state": "state1",
+      "text": "完善项目信息"
+    },
+    {
+      "state": "state1",
+      "text": "硬件清单准备"
+    },
+    {
+      "state": "state1",
+      "text": "入场准备"
+    },
+    {
+      "state": "state1",
+      "text": "确认项目范围"
+    },
+    {
+      "state": "state5",
+      "text": "测试环境搭建"
+    },
+    {
+      "state": "state1",
+      "text": "实施计划制"
+    },
+    {
+      "state": "state1",
+      "text": "项目启动"
+    }
+  ],
+  "result_two": [
+    {
+      "state": "state3",
+      "text": "模拟系统运行"
+    },
+    {
+      "state": "state4",
+      "text": ""
+    },
+    {
+      "state": "state3",
+      "text": "培训客户&考核"
+    },
+    {
+      "state": "state3",
+      "text": "安装站点软硬件"
+    },
+    {
+      "state": "state4",
+      "text": ""
+    },
+    {
+      "state": "state4",
+      "text": ""
+    },
+    {
+      "state": "state3",
+      "text": "检验易用数据"
+    },
+    {
+      "state": "state3",
+      "text": "检验基础数据"
+    },
+    {
+      "state": "state4",
+      "text": "维护基础数据"
+    },
+    {
+      "state": "state4",
+      "text": "维护易用数据"
+    },
+    {
+      "state": "state3",
+      "text": "调研流程&配置"
+    },
+    {
+      "state": "state3",
+      "text": "开发接口&交付"
+    },
+    {
+      "state": "state3",
+      "text": "单据报表&交付"
+    },
+    {
+      "state": "state4",
+      "text": "数据维护"
+    },
+    {
+      "state": "state3",
+      "text": "确认流程数量"
+    },
+    {
+      "state": "state3",
+      "text": "确认接口数量"
+    },
+    {
+      "state": "state3",
+      "text": "确认硬件数量"
+    },
+    {
+      "state": "state3",
+      "text": "确认数据报表数量"
+    }
+  ],
+  "result_Three": [
+    {
+      "state": "state3",
+      "text": "评估上线可行性"
+    },
+    {
+      "state": "state3",
+      "text": "审批切换方案"
+    },
+    {
+      "state": "state4",
+      "text": "安排人员到岗"
+    },
+    {
+      "state": "state4",
+      "text": "切换项目"
+    },
+    {
+      "state": "state3",
+      "text": "结束"
+    }
+  ],
+  "failtCode":"",
+  "funName":"",
+  "link":"",
+  "message":"",
+  "messageCode":"",
+  "requstUrl":"",
+  "type":"SUCCESS"
+}
