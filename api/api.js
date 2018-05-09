@@ -14,12 +14,12 @@ const ENCRYPTION_FLAG = false;
 
 //const baseUrl = debugMod ? "http://127.0.0.1:9087/NC/" : "http://172.16.0.129:9078/NC/";
 //阿里云
-const baseUrl = debugMod ? "http://localhost:8081/ssgjm/" : "http://47.97.170.21:8081/ssgjm/";
-const imageUrl = "http://47.97.170.21:8081/";
+// const baseUrl = debugMod ? "http://localhost:8081/ssgjm/" : "http://47.97.170.21:8081/ssgjm/";
+// const imageUrl = "http://47.97.170.21:8081/";
 
 //公司 /
-// const baseUrl = debugMod ? "http://localhost:8081/ssgjm/" : "http://203.110.176.176:8081/ssgjm/";
-// const imageUrl = "http://203.110.176.176:8081/";
+const baseUrl = debugMod ? "http://localhost:8081/ssgjm/" : "http://203.110.176.176:8081/ssgjm/";
+const imageUrl = "http://203.110.176.176:8081/";
 
 // 服务器本地  /imsx
 // const baseUrl = debugMod ? "http://localhost:8081/ssgjm/" : "http://172.16.0.201:8081/ssgjm/";
