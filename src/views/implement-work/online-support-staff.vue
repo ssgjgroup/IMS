@@ -8,8 +8,8 @@
     <!--接口对应系统-->
     <div class="w-table">
       <div class="w-table-btn">
-        <span @click="confirmOnLineUser" :class="{ active:onlineActive }"><i class="iconfont icon-conf-complete"></i>确认完成</span>
-        <span @click="openEtOnlineUserWindow"><i class="iconfont icon-new-add"></i>新增</span>
+        <span @click="doConfirm" :class="{ active:onlineActive }"><i class="iconfont icon-conf-complete"></i>确认完成</span>
+        <span @click="openEtOnlineUserWindow" v-show="!onlineActive"><i class="iconfont icon-new-add"></i>新增</span>
         <span @click="openLineUploadWindow"><i class="iconfont icon-to-lead"></i>导入</span>
         <span @click="downloadExcelLineUser"><i class="iconfont icon-export"></i>导出</span>
       </div>
@@ -56,7 +56,7 @@
           <el-table-column
             label="操作">
             <template slot-scope="scope">
-              <div class="operate">
+              <div class="operate" v-show="!onlineActive">
                 <i class="iconfont icon-edit" @click="openLineUserDetails(scope.row)"></i>
                 <i class="iconfont icon-delete" @click="deleteEtOnlineUsetInfoDetails(scope.row.id)"></i>
               </div>
@@ -193,7 +193,7 @@
           ],
           email: [
             {
-              required: true,
+              // required: true,
               pattern: /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/,
               message: '邮箱验证失败'
             }
@@ -249,10 +249,15 @@
           'first': first,
           'count': pageSize
         }).then((data) => {
-          //console.log(data);
+          console.log(data);
           this.etOnlineInfo = data.rows;
           this.total = data.total;
           this.deptList = data.deptList;
+          if (data.process.isSupportStaff != 1 || data.process.isEnd != 1) {
+            this.onlineActive = false;
+          } else if (data.process.isSupportStaff == 1 && data.process.isEnd == 1) {
+            this.onlineActive = true;
+          }
         });
       },
       //上传成功
@@ -355,7 +360,7 @@
         this.action = api.url.etOnlineUserInfo.uploadFile
           + '?pmId=' + this.$parent.getProjectId()
           + '&operator=' + this.$parent.getUserId()
-          + '&serialNo='+this.$parent.getCustomerId();
+          + '&serialNo=' + this.$parent.getCustomerId();
       },
       onlineAddOrModify: function (formName) { //增加或者修改数据
         var json = {
@@ -414,26 +419,51 @@
       downloadExcelLineUser: function () {
         window.open(api.url.etOnlineUserInfo.exportExcel + '?pmId=' + this.$parent.getProjectId());
       },
-      //上线支持人员工作确认完成
-      confirmOnLineUser: function () {
-        var pmId = this.$parent.getProjectId();
-        var operator = this.$parent.getUserId();
-        this.$confirm('此操作是用来确定上线支持人员工作完成，是否确定完成?', '提示', {
-          confirmButtonText: '是',
-          cancelButtonText: '否',
+      //确认完成
+      doConfirm: function () {
+        let pmId = this.$parent.getProjectId();
+        let confirmText = '';
+        let succMessage = '';
+        let calMessage = '';
+        let isSupportStaff = 0;
+        let isEnd = 0;
+        if (!this.onlineActive) {
+          confirmText = '此操作将确认上线支持人员工作完成, 是否继续?';
+          succMessage = '确认成功';
+          calMessage = '已取消确认';
+          isSupportStaff = 1;
+          isEnd = 1;
+        } else {
+          confirmText = '此操作将取消确认上线支持人员工作完成, 是否继续?';
+          succMessage = '取消成功';
+          calMessage = '已撤销取消';
+          isSupportStaff = 0;
+          isEnd = 0;
+        }
+        this.$confirm(confirmText, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          api.post(api.url.etOnlineUserInfo.confirmUser, {'pmId': pmId, 'operator': operator}).then((data) => {
+          api.post(api.url.etOnlineUserInfo.confirmUser, {
+            pmId: pmId,
+            operator: this.$parent.getUserId(),
+            isSupportStaff: isSupportStaff,
+            isEnd: isEnd,
+          }).then((data) => {
             if (data.status == "success") {
-              this.$message({type: 'success', message: '确认完成!'});
-              this.onlineActive = true;
-              this.getEtOnlineUserInfo();
+              this.$message({type: 'success', message: succMessage});
+              if (!this.onlineActive) {
+                this.onlineActive = true;
+              } else {
+                this.onlineActive = false;
+              }
             }
           });
         }).catch(() => {
           this.$message({
-            type: 'info',
-            message: '已取消确认'
+            type: "info",
+            message: calMessage
           });
         });
       },

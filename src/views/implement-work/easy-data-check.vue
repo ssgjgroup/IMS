@@ -17,7 +17,8 @@
           style="width: 100%"
           @selection-change="handleSelectionChange">
           <el-table-column
-            type="selection">
+            type="selection"
+          >
           </el-table-column>
           <!--<el-table-column-->
           <!--prop="databaseName"-->
@@ -34,8 +35,7 @@
           <!--</el-table-column>-->
           <el-table-column
             prop="map.type"
-            label="分类"
-            align="center">
+            label="分类">
           </el-table-column>
           <el-table-column
             prop="isUse"
@@ -315,6 +315,7 @@
       batchExport() {
         let checkArr = this.multipleSelection;
         if (checkArr.length == 0) {
+          this.$message.warning("请选择需导出校验脚本的易用数据！");
           return;
         }
         let idsStr = "";
@@ -348,12 +349,12 @@
         let calMessage = '';
         let isEasyDataCheck = 0;
         if (!this.isActive) {
-          confirmText = '此操作将确认基础数据校验, 是否继续?';
+          confirmText = '此操作将确认易用数据校验, 是否继续?';
           succMessage = '确认成功';
           calMessage = '已取消确认';
           isEasyDataCheck = 1;
         } else {
-          confirmText = '此操作将取消确认基础数据校验, 是否继续?';
+          confirmText = '此操作将取消确认易用数据校验, 是否继续?';
           succMessage = '取消成功';
           calMessage = '已撤销取消';
           isEasyDataCheck = 0;
