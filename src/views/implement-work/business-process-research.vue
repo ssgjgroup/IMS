@@ -107,9 +107,8 @@
     <!--新增-->
     <el-dialog :title="title" width="50%" :visible.sync="newAdd">
       <el-form :model="flowForm" :rules="rules" ref="flowForm" label-width="100px">
-        <el-form-item label="流程编号" prop="flowCode">
-          <el-input v-model="flowForm.flowCode" :disabled="isActive">
-            <template slot="prepend">WN-YWLC-</template>
+        <el-form-item label="流程编号" prop="flowCode" v-show="flowCodeShow" >
+          <el-input v-model="flowForm.flowCode" :disabled="flowCodeShow">
           </el-input>
         </el-form-item>
         <el-form-item label="流程名称" prop="flowName">
@@ -211,10 +210,6 @@ export default {
         message: ''
       },
       rules: {
-        flowCode: [
-          { required: true, message: '请输入流程编号' },
-          { pattern: /^[a-zA-Z0-9_-]+$/, message: '流程编号只能是数字字母和下划线组成' }
-        ],
         flowName: { required: true, message: '请输入流程名称' },
         isScope: { required: true, message: '请选择范围', trigger: 'change' }
       },
@@ -244,7 +239,8 @@ export default {
       operateRow: {},
       viewList: [],
       viewImageWindow: false,
-      uploadFilePath: ''
+      uploadFilePath: '',
+      flowCodeShow:false
     }
   },
   created() {
@@ -326,6 +322,7 @@ export default {
       }
       this.title = "新增";
       this.flowForm.isScope = 1;
+      this.flowCodeShow = false;
       this.newAdd = true;
     },
     //修改业务流程
@@ -334,8 +331,9 @@ export default {
         this.$refs['flowForm'].resetFields();
       }
       this.title = "修改";
+      this.flowCodeShow = true;
       this.flowForm.id = data.id;
-      this.flowForm.flowCode = data.flowCode.substr(8);
+      this.flowForm.flowCode = data.flowCode;
       this.flowForm.flowName = data.flowName;
       this.flowForm.isScope = data.isScope;
       this.flowForm.status = data.status;
@@ -346,7 +344,7 @@ export default {
     addOrModifyProcess(formName) {
       var json = {
         id: this.flowForm.id,
-        flowCode: 'WN-YWLC-' + this.flowForm.flowCode,
+        flowCode: this.flowForm.flowCode,
         flowName: this.flowForm.flowName,
         isScope: this.flowForm.isScope,
         status: this.flowForm.status,

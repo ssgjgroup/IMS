@@ -391,13 +391,13 @@
                   prop="mainStep"
                   label="主要阶段">
                 </el-table-column>
-                <el-table-column
-                  prop="stepType"
-                  label="阶段工作分类">
-                </el-table-column>
+              <!--   <el-table-column
+                prop="stepType"
+                label="阶段工作分类">
+              </el-table-column> -->
                 <el-table-column
                   prop="stepContent"
-                  label="主要工作内容">
+                  label="主要工作内容" width="400px">
                 </el-table-column>
                 <el-table-column
                   prop="stepDesc"
