@@ -13,13 +13,14 @@ const debugMod = false;
 const ENCRYPTION_FLAG = false;
 //const baseUrl = debugMod ? "http://127.0.0.1:9087/NC/" : "http://172.16.0.129:9078/NC/";//服务器
 // 阿里云
-const baseUrl = debugMod ? "http://localhost:8081/ssgjm/" : "http://47.97.170.21:8081/ssgjm/";//服务器
-const imageUrl = "http://47.97.170.21:8081/";//服务器
-// 外网
-// const baseUrl = debugMod ? "http://localhost:8081/ssgjm/" : "http://203.110.176.176:8081/ssgjm/";
-// const imageUrl = "http://203.110.176.176:8081/";
+// const baseUrl = debugMod ? "http://localhost:8081/ssgjm/" : "http://47.97.170.21:8081/ssgjm/";
+// const imageUrl = "http://47.97.170.21:8081/";
 
-// 服务器本地
+//公司 /
+const baseUrl = debugMod ? "http://localhost:8081/ssgjm/" : "http://203.110.176.176:8081/ssgjm/";
+const imageUrl = "http://203.110.176.176:8081/";
+
+// 服务器本地  /imsx
 // const baseUrl = debugMod ? "http://localhost:8081/ssgjm/" : "http://172.16.0.201:8081/ssgjm/";
 // const imageUrl = "http://172.16.0.201:8081/";
 
@@ -34,11 +35,12 @@ const status = {
 const url = {
 
   menuInfo: {
-    initData: baseUrl + 'vue/common/queryCustomerMenu.do'  //查询客户信息和项目信息
+    initData: baseUrl + 'vue/common/queryCustomerMenu.do' //查询客户信息和项目信息
   },
   userInfo: {
-    initData: baseUrl + 'vue/common/user.do', //查询用户信息包含项目、客户等
-    authInfo: baseUrl + 'vue/common/checkAuth.do' //检查用户是否是项目经理
+    //initData: baseUrl + 'vue/common/user.do', //查询用户信息包含项目、客户等
+    authInfo: baseUrl + 'vue/common/checkAuth.do', //检查用户是否是项目经理
+    queryUser: baseUrl + 'vue/common/queryUser.do' //查询用户信息
   },
   //登录
   loginInfo: {
@@ -47,8 +49,8 @@ const url = {
   },
   //首页信息
   projectInfo: {
-    initData: baseUrl + 'vue/processManager/info.do',  //用户登录选择项目后首页初始化
-    addLastLogin: baseUrl + 'vue/etUserLook/add.do'    //首页选择项目后记录项目选择信息
+    initData: baseUrl + 'vue/processManager/info.do', //用户登录选择项目后首页初始化
+    addLastLogin: baseUrl + 'vue/etUserLook/add.do' //首页选择项目后记录项目选择信息
   },
   //医院科室信息
   deptInfo: {
@@ -72,8 +74,8 @@ const url = {
     addOrModify: baseUrl + 'vue/etUserInfo/addOrModify.do', //添加或者修改数据
     exportExcel: baseUrl + 'vue/etUserInfo/exportExcel.do', //导出Excel
     uploadFile: baseUrl + 'vue/etUserInfo/upload.do', //上传Excel
-    confirm: baseUrl + 'vue/etUserInfo/confirm.do',//删除
-    deleteUser: baseUrl + 'vue/etUserInfo/delete.do'  //删除
+    confirm: baseUrl + 'vue/etUserInfo/confirm.do', //删除
+    deleteUser: baseUrl + 'vue/etUserInfo/delete.do' //删除
 
   },
   //上线支持人员
@@ -119,22 +121,22 @@ const url = {
     addOrModify: baseUrl + 'vue/devEnvHardware/addOrModify.do',
     delete: baseUrl + 'vue/devEnvHardware/delete.do',
     exportExcel: baseUrl + 'vue/devEnvHardware/exportExcel.do',
-    uploadFile: baseUrl + 'vue/devEnvHardware/upload.do',//上传excel文件入库
+    uploadFile: baseUrl + 'vue/devEnvHardware/upload.do', //上传excel文件入库
   },
 
   //硬件
   softHardware: {
-    initSourceData: baseUrl + 'vue/softHardware/initSourceData.do',//初始化数据源
+    initSourceData: baseUrl + 'vue/softHardware/initSourceData.do', //初始化数据源
     initData: baseUrl + 'vue/softHardware/list.do',
-    numChange: baseUrl + 'vue/softHardware/numChange.do',//改变数量
-    changeScope: baseUrl + 'vue/softHardware/changeScope.do',//修改范围
-    changeContent: baseUrl + 'vue/softHardware/changeContent.do',//修改完成情况
+    numChange: baseUrl + 'vue/softHardware/numChange.do', //改变数量
+    changeScope: baseUrl + 'vue/softHardware/changeScope.do', //修改范围
+    changeContent: baseUrl + 'vue/softHardware/changeContent.do', //修改完成情况
     addOrModify: baseUrl + 'vue/softHardware/addOrModify.do',
     delete: baseUrl + 'vue/softHardware/delete.do',
     exportExcel: baseUrl + 'vue/softHardware/exportExcel.do',
-    uploadFile: baseUrl + 'vue/softHardware/upload.do',//上传excel文件入库
-    doStartConfirm: baseUrl + 'vue/softHardware/doStartConfirm.do',//确定完成
-    confirm: baseUrl + 'vue/softHardware/confirm.do'//确定完成
+    uploadFile: baseUrl + 'vue/softHardware/upload.do', //上传excel文件入库
+    doStartConfirm: baseUrl + 'vue/softHardware/doStartConfirm.do', //确定完成
+    confirm: baseUrl + 'vue/softHardware/confirm.do' //确定完成
   },
   //检查登记
   registerCheck: {
@@ -144,61 +146,61 @@ const url = {
   },
   //基础数据维护
   basicData: {
-    initData: baseUrl + 'vue/basicData/list.do',//加载基本数据
-    detail: baseUrl + 'vue/basicData/detail.do',//获取数据详情
-    exportExcel: baseUrl + 'vue/basicData/exportExcel.do',//导出所有基本数据
-    uploadFile: baseUrl + 'vue/basicData/upload.do',//上传excel文件入库
-    exportDataInfo: baseUrl + 'vue/basicData/exportDataInfo.do',//导出某条基本数据详情
-    exportSql: baseUrl + 'vue/basicData/exportSql.do',//导出某条基本数据详情的查询sql文件
-    addOrModify: baseUrl + 'vue/basicData/addOrModify.do',//增加或编辑
-    confirm: baseUrl + 'vue/basicData/confirm.do'//确定完成
+    initData: baseUrl + 'vue/basicData/list.do', //加载基本数据
+    detail: baseUrl + 'vue/basicData/detail.do', //获取数据详情
+    exportExcel: baseUrl + 'vue/basicData/exportExcel.do', //导出所有基本数据
+    uploadFile: baseUrl + 'vue/basicData/upload.do', //上传excel文件入库
+    exportDataInfo: baseUrl + 'vue/basicData/exportDataInfo.do', //导出某条基本数据详情
+    exportSql: baseUrl + 'vue/basicData/exportSql.do', //导出某条基本数据详情的查询sql文件
+    addOrModify: baseUrl + 'vue/basicData/addOrModify.do', //增加或编辑
+    confirm: baseUrl + 'vue/basicData/confirm.do' //确定完成
   },
   //基础数据校验
   dataCheck: {
-    initSourceData: baseUrl + 'vue/dataCheck/initSourceData.do',//初始化数据源
-    initData: baseUrl + 'vue/dataCheck/list.do',//加载基本数据
-    detail: baseUrl + 'vue/dataCheck/detail.do',//获取数据详情
-    exportModel: baseUrl + 'vue/dataCheck/exportModel.do',//导出所有基本数据
-    exportExcel: baseUrl + 'vue/dataCheck/exportExcel.do',//导出所有基本数据
-    uploadFile: baseUrl + 'vue/dataCheck/upload.do',//上传excel文件入库
-    exportDataInfo: baseUrl + 'vue/dataCheck/exportDataInfo.do',//导出某条基本数据详情
-    exportSql: baseUrl + 'vue/dataCheck/exportSql.do',//导出某条基本数据详情的查询sql文件
-    addOrModify: baseUrl + 'vue/dataCheck/addOrModify.do',//增加或编辑
-    confirm: baseUrl + 'vue/dataCheck/confirm.do'//确定完成
+    initSourceData: baseUrl + 'vue/dataCheck/initSourceData.do', //初始化数据源
+    initData: baseUrl + 'vue/dataCheck/list.do', //加载基本数据
+    detail: baseUrl + 'vue/dataCheck/detail.do', //获取数据详情
+    exportModel: baseUrl + 'vue/dataCheck/exportModel.do', //导出所有基本数据
+    exportExcel: baseUrl + 'vue/dataCheck/exportExcel.do', //导出所有基本数据
+    uploadFile: baseUrl + 'vue/dataCheck/upload.do', //上传excel文件入库
+    exportDataInfo: baseUrl + 'vue/dataCheck/exportDataInfo.do', //导出某条基本数据详情
+    exportSql: baseUrl + 'vue/dataCheck/exportSql.do', //导出某条基本数据详情的查询sql文件
+    addOrModify: baseUrl + 'vue/dataCheck/addOrModify.do', //增加或编辑
+    confirm: baseUrl + 'vue/dataCheck/confirm.do' //确定完成
   },
   //易用数据校验
   easyDataCheck: {
-    initSourceData: baseUrl + 'vue/easyDataCheck/initSourceData.do',//初始化数据源
-    initData: baseUrl + 'vue/easyDataCheck/list.do',//加载易用校验数据
-    detail: baseUrl + 'vue/easyDataCheck/detail.do',//获取数据详情
-    exportModel: baseUrl + 'vue/easyDataCheck/exportModel.do',//导出所有基本数据
-    batchExport: baseUrl + 'vue/easyDataCheck/batchExport.do',//导出所有易用校验数据
-    uploadFile: baseUrl + 'vue/easyDataCheck/upload.do',//上传excel文件入库
-    exportSql: baseUrl + 'vue/easyDataCheck/exportSql.do',//导出某条易用校验数据详情的查询sql文件
-    changeScope: baseUrl + 'vue/easyDataCheck/changeScope.do',//修改范围
-    confirm: baseUrl + 'vue/easyDataCheck/confirm.do'//确定完成
+    initSourceData: baseUrl + 'vue/easyDataCheck/initSourceData.do', //初始化数据源
+    initData: baseUrl + 'vue/easyDataCheck/list.do', //加载易用校验数据
+    detail: baseUrl + 'vue/easyDataCheck/detail.do', //获取数据详情
+    exportModel: baseUrl + 'vue/easyDataCheck/exportModel.do', //导出所有基本数据
+    batchExport: baseUrl + 'vue/easyDataCheck/batchExport.do', //导出所有易用校验数据
+    uploadFile: baseUrl + 'vue/easyDataCheck/upload.do', //上传excel文件入库
+    exportSql: baseUrl + 'vue/easyDataCheck/exportSql.do', //导出某条易用校验数据详情的查询sql文件
+    changeScope: baseUrl + 'vue/easyDataCheck/changeScope.do', //修改范围
+    confirm: baseUrl + 'vue/easyDataCheck/confirm.do' //确定完成
   },
   //接口梳理开发
   thirdInterface: {
-    initSourceData: baseUrl + 'vue/thirdInterface/initSourceData.do',//初始化数据源
-    getData: baseUrl + 'vue/thirdInterface/initData.do',//加载接口数据
-    initData: baseUrl + 'vue/thirdInterface/list.do',//加载接口数据
-    addOrModify: baseUrl + 'vue/thirdInterface/addOrModify.do',//增加或编辑
-    delete: baseUrl + 'vue/thirdInterface/delete.do',//删除
-    changeScope: baseUrl + 'vue/thirdInterface/changeScope.do',//修改范围
-    changeContent: baseUrl + 'vue/thirdInterface/changeContent.do',//修改完成情况
-    changeStatus: baseUrl + 'vue/thirdInterface/changeStatus.do',//修改审核状态
-    exportExcel: baseUrl + 'vue/thirdInterface/exportExcel.do',//导出表格
-    export: baseUrl + 'vue/thirdInterface/export.do',//导出表格
-    confirmDev: baseUrl + 'vue/thirdInterface/confirmDev.do',//确定开发完成
-    confirmNum: baseUrl + 'vue/thirdInterface/confirmNum.do'//确定数量完成
+    initSourceData: baseUrl + 'vue/thirdInterface/initSourceData.do', //初始化数据源
+    getData: baseUrl + 'vue/thirdInterface/initData.do', //加载接口数据
+    initData: baseUrl + 'vue/thirdInterface/list.do', //加载接口数据
+    addOrModify: baseUrl + 'vue/thirdInterface/addOrModify.do', //增加或编辑
+    delete: baseUrl + 'vue/thirdInterface/delete.do', //删除
+    changeScope: baseUrl + 'vue/thirdInterface/changeScope.do', //修改范围
+    changeContent: baseUrl + 'vue/thirdInterface/changeContent.do', //修改完成情况
+    changeStatus: baseUrl + 'vue/thirdInterface/changeStatus.do', //修改审核状态
+    exportExcel: baseUrl + 'vue/thirdInterface/exportExcel.do', //导出表格
+    export: baseUrl + 'vue/thirdInterface/export.do', //导出表格
+    confirmDev: baseUrl + 'vue/thirdInterface/confirmDev.do', //确定开发完成
+    confirmNum: baseUrl + 'vue/thirdInterface/confirmNum.do' //确定数量完成
   },
   //业务流程调研
   businessProcess: {
     initData: baseUrl + 'vue/businessProcess/list.do', //加载数据
     countInfo: baseUrl + 'vue/businessProcess/countInfo.do', //加载流程总量数据
     changeScope: baseUrl + 'vue/businessProcess/changeScope.do', //修改范围
-    addOrModify: baseUrl + 'vue/businessProcess/addOrModify.do',//增加或编辑
+    addOrModify: baseUrl + 'vue/businessProcess/addOrModify.do', //增加或编辑
     delete: baseUrl + 'vue/businessProcess/delete.do', //流程删除
     deleteFile: baseUrl + 'vue/businessProcess/deleteFile.do', //流程删除
     confirmFlowNum: baseUrl + 'vue/businessProcess/confirmFlowNum.do', //确认流程数量
@@ -210,11 +212,9 @@ const url = {
   },
   //指挥中心安排
   siteCenter: {
-    initData: baseUrl + 'vue/siteCenter/list.do',  //加载数据
+    initData: baseUrl + 'vue/siteCenter/list.do', //加载数据
     updateEchart: baseUrl + 'vue/siteCenter/updateChart.do', //更新饼图数据
-    updateOperType: baseUrl + 'vue/siteCenter/updateOperate.do',
-    updatePriorityType: baseUrl + 'vue/siteCenter/updatePriority.do',
-    updateAllocateUser: baseUrl + 'vue/siteCenter/updateAllocateUser.do',
+    update: baseUrl + 'vue/siteCenter/update.do',
     exportPmisData: baseUrl + 'vue/siteCenter/exportPmisData.do',
     imagePath: imageUrl + 'shareFolder' //图片路径
   },
@@ -229,17 +229,17 @@ const url = {
     removeSite: baseUrl + 'vue/siteInstall/removeSite.do',
     selectDeptList: baseUrl + 'vue/siteInstall/deptList.do',
     updateSiteInstall: baseUrl + 'vue/siteInstall/updateSite.do',
-    changeScope: baseUrl + 'vue/siteInstall/changeScope.do',//修改范围
-    changeHardWare: baseUrl + 'vue/siteInstall/changeHardWare.do',//硬件范围
-    changeSoftWare: baseUrl + 'vue/siteInstall/changeSoftWare.do',//软件范围
-    changeUser: baseUrl + 'vue/siteInstall/changeUser.do',//分配人范围
-    changeSite: baseUrl + 'vue/siteInstall/changeSite.do',//分配人范围
-    addSiteInstallDetail: baseUrl + 'vue/siteInstall/addSiteInstallDetail.do',//分配人范围
-    uploadFileSite: baseUrl + 'vue/siteInstall/uploadFileSite.do',//图片上传
-    saveSiteDetail: baseUrl + 'vue/siteInstall/saveSiteDetail.do',//保存明细信息
-    deleteItem: baseUrl + 'mobile/siteInstall/deleteItem.do',//保存明细信息
-    addItem: baseUrl + 'mobile/siteInstall/addItem.do',//保存明细信息
-    siteEnd: baseUrl + 'vue/siteInstall/siteEnd.do',//保存明细信息
+    changeScope: baseUrl + 'vue/siteInstall/changeScope.do', //修改范围
+    changeHardWare: baseUrl + 'vue/siteInstall/changeHardWare.do', //硬件范围
+    changeSoftWare: baseUrl + 'vue/siteInstall/changeSoftWare.do', //软件范围
+    changeUser: baseUrl + 'vue/siteInstall/changeUser.do', //分配人范围
+    changeSite: baseUrl + 'vue/siteInstall/changeSite.do', //分配人范围
+    addSiteInstallDetail: baseUrl + 'vue/siteInstall/addSiteInstallDetail.do', //分配人范围
+    uploadFileSite: baseUrl + 'vue/siteInstall/uploadFileSite.do', //图片上传
+    saveSiteDetail: baseUrl + 'vue/siteInstall/saveSiteDetail.do', //保存明细信息
+    deleteItem: baseUrl + 'mobile/siteInstall/deleteItem.do', //保存明细信息
+    addItem: baseUrl + 'mobile/siteInstall/addItem.do', //保存明细信息
+    siteEnd: baseUrl + 'vue/siteInstall/siteEnd.do', //保存明细信息
     uploadFile: baseUrl + 'vue/siteInstall/upload.do', //上传医院用户信息
     exportExcel: baseUrl + 'vue/siteInstall/exportExcel.do', //导出医院用户信息
     showEchart: baseUrl + 'vue/siteInstall/showEchart.do', //展示工作比重的信息
@@ -247,18 +247,18 @@ const url = {
   },
   //报表
   report: {
-    initSourceData: baseUrl + 'vue/report/initSourceData.do',//初始化数据源
+    initSourceData: baseUrl + 'vue/report/initSourceData.do', //初始化数据源
     initData: baseUrl + 'vue/report/list.do',
-    numChange: baseUrl + 'vue/report/numChange.do',//改变数量
-    changeScope: baseUrl + 'vue/report/changeScope.do',//修改范围
-    changeContent: baseUrl + 'vue/report/changeContent.do',//修改完成情况
+    numChange: baseUrl + 'vue/report/numChange.do', //改变数量
+    changeScope: baseUrl + 'vue/report/changeScope.do', //修改范围
+    changeContent: baseUrl + 'vue/report/changeContent.do', //修改完成情况
     addOrModify: baseUrl + 'vue/report/addOrModify.do',
     delete: baseUrl + 'vue/report/delete.do',
     exportExcel: baseUrl + 'vue/report/exportExcel.do',
-    upload: baseUrl + 'vue/report/upload.do',//上传excel文件入库
-    changeStatus: baseUrl + 'vue/report/changeStatus.do',//修改审核状态
-    confirmDev: baseUrl + 'vue/report/confirmDev.do',//确定开发完成
-    confirmNum: baseUrl + 'vue/report/confirmNum.do',//确定数量完成
+    upload: baseUrl + 'vue/report/upload.do', //上传excel文件入库
+    changeStatus: baseUrl + 'vue/report/changeStatus.do', //修改审核状态
+    confirmDev: baseUrl + 'vue/report/confirmDev.do', //确定开发完成
+    confirmNum: baseUrl + 'vue/report/confirmNum.do', //确定数量完成
     imagePath: imageUrl + 'shareFolder', //图片路径
   },
   //模拟记录
@@ -272,12 +272,12 @@ const url = {
   },
   //上线可行性报告和切换方案
   onLineReport: {
-    initData: baseUrl + 'vue/onLineReport/initData.do',//加载初始数据
-    refreshFile: baseUrl + 'vue/onLineReport/refreshFile.do',//加载初始数据
-    confirm: baseUrl + 'vue/onLineReport/confirm.do',//确认上线可行性报告
+    initData: baseUrl + 'vue/onLineReport/initData.do', //加载初始数据
+    refreshFile: baseUrl + 'vue/onLineReport/refreshFile.do', //加载初始数据
+    confirm: baseUrl + 'vue/onLineReport/confirm.do', //确认上线可行性报告
     upload: baseUrl + 'vue/onLineReport/upload.do', //上传
     delete: baseUrl + 'vue/onLineReport/delete.do', //删除上传文件
-    initSwitchData: baseUrl + 'vue/onLineReport/initSwitchData.do',//加载切换方案初始数据
+    initSwitchData: baseUrl + 'vue/onLineReport/initSwitchData.do', //加载切换方案初始数据
     checkWork: baseUrl + 'vue/onLineReport/checkWork.do' //工作完成情况查询
   }
 };
@@ -318,7 +318,7 @@ let catchErrorEvt = function (error) {
 
 let nullToString = function (data) {
   for (let it in data) {
-    if (typeof(data[it]) === "object") {
+    if (typeof (data[it]) === "object") {
       nullToString(data[it]);
     }
     data[it] = data[it] == null ? '' : data[it];

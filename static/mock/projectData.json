@@ -1,0 +1,20 @@
+{
+  "data":{
+    "implePath":[
+      {
+        "milestone":"启动",
+        "mainStage":"环境搭建",
+        "mainStageType":"环境搭建对硬件及网络要求",
+        "mainWork":"列出硬件清单",
+       "detailWork":"列出PC打印机等清单",
+        "outputConent":"产出物",
+        "note":"仔细测量"
+      }
+    ]
+  },
+  "failtCode":"",
+  "link":"",
+  "message":"",
+  "messageCode":"",
+  "type":"SUCCESS"
+}

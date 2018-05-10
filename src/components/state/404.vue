@@ -8,7 +8,7 @@
   <img src="../../assets/images/404.png"
        alt="404"
        title="404">
-  <span>访问地址不存在...</span>
+  <span>正在建设中...</span>
 </div>
 </template>
 <!--JavaScript-->

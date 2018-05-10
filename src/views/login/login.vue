@@ -135,6 +135,7 @@
               console.log('登录成功');
               window.localStorage.setItem('user',JSON.stringify(data.user));
               window.localStorage.setItem('token',data.token);
+              window.localStorage.setItem('menuIndex','1-1');//初始化菜单index为‘1-1’
               this.$parent.getProjectInfo();
               this.$parent.getUserInfo();
               this.$parent.setProjectInfo();

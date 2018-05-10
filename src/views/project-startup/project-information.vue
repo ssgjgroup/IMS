@@ -391,13 +391,13 @@
                   prop="mainStep"
                   label="主要阶段">
                 </el-table-column>
-                <el-table-column
-                  prop="stepType"
-                  label="阶段工作分类">
-                </el-table-column>
+              <!--   <el-table-column
+                prop="stepType"
+                label="阶段工作分类">
+              </el-table-column> -->
                 <el-table-column
                   prop="stepContent"
-                  label="主要工作内容">
+                  label="主要工作内容" width="400px">
                 </el-table-column>
                 <el-table-column
                   prop="stepDesc"
@@ -472,7 +472,7 @@
                 <el-table-column
                   label="操作">
                   <template slot-scope="scope">
-                    <div class="operate" v-show="scope.row.isDel != -1">
+                    <div class="operate" v-show="scope.row.remark == '' ">
                       <i class="iconfont icon-edit" @click="openEtUsetInfoDetails(scope.row)"></i>
                       <i class="iconfont icon-delete" @click="deleteEtUsetInfoDetails(scope.row.id)"></i>
                     </div>

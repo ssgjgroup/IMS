@@ -8,8 +8,8 @@
     <!--接口对应系统-->
     <div class="w-table">
       <div class="w-table-btn">
-        <span @click="confirmOnLineUser" :class="{ active:onlineActive }"><i class="iconfont icon-conf-complete"></i>确认完成</span>
-        <span @click="openEtOnlineUserWindow"><i class="iconfont icon-new-add"></i>新增</span>
+        <span @click="doConfirm" :class="{ active:onlineActive }"><i class="iconfont icon-conf-complete"></i>确认完成</span>
+        <span @click="openEtOnlineUserWindow" v-show="!onlineActive"><i class="iconfont icon-new-add"></i>新增</span>
         <span @click="openLineUploadWindow"><i class="iconfont icon-to-lead"></i>导入</span>
         <span @click="downloadExcelLineUser"><i class="iconfont icon-export"></i>导出</span>
       </div>
@@ -30,8 +30,8 @@
             label="角色">
           </el-table-column>
           <el-table-column
-            prop="responseDept"
-            label="部门">
+            prop="map.department"
+            label="负责科室">
           </el-table-column>
           <el-table-column
             prop="responseSite"
@@ -56,7 +56,7 @@
           <el-table-column
             label="操作">
             <template slot-scope="scope">
-              <div class="operate">
+              <div class="operate" v-show="!onlineActive">
                 <i class="iconfont icon-edit" @click="openLineUserDetails(scope.row)"></i>
                 <i class="iconfont icon-delete" @click="deleteEtOnlineUsetInfoDetails(scope.row.id)"></i>
               </div>
@@ -80,31 +80,41 @@
     <!--上线支持人员录入弹窗-->
     <el-dialog :title="title" width="30%" :visible.sync="etOnlineUserWindow">
       <el-form :model="etOnlineUserForm" :rules="rules" ref="etOnlineUserForm">
-        <el-form-item label="工号" label-width="60px" prop="userCode" required>
+        <el-form-item label="工号" label-width="60px" prop="userCode">
           <el-input v-model="etOnlineUserForm.userCode" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="姓名" label-width="60px" prop="cName" required>
+        <el-form-item label="姓名" label-width="60px" prop="cName">
           <el-input v-model="etOnlineUserForm.cName" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="部门" label-width="60px" prop="responseDept" required>
-          <el-input v-model="etOnlineUserForm.responseDept" auto-complete="off"></el-input>
+        <el-form-item label="负责科室" label-width="85px" prop="responseDept">
+          <el-select v-model="responseDept" placeholder="请选择" @change="doSelect(responseDept)">
+            <el-option
+              v-for="item in deptList"
+              :key="item.id"
+              :label="item.deptName"
+              :value="item.id.toString()">
+            </el-option>
+          </el-select>
         </el-form-item>
-        <el-form-item label="角色" label-width="60px" prop="roleName" required>
+        <!--<el-form-item label="部门" label-width="60px" prop="responseDept">-->
+        <!--<el-input v-model="etOnlineUserForm.responseDept" auto-complete="off"></el-input>-->
+        <!--</el-form-item>-->
+        <el-form-item label="角色" label-width="60px" prop="roleName">
           <el-input v-model="etOnlineUserForm.roleName" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="站点" label-width="60px" prop="responseSite" required>
+        <el-form-item label="站点" label-width="60px" prop="responseSite">
           <el-input v-model="etOnlineUserForm.responseSite" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="微信号" label-width="70px" prop="wechatNo" required>
+        <el-form-item label="微信号" label-width="70px" prop="wechatNo">
           <el-input v-model="etOnlineUserForm.wechatNo" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="电话" label-width="60px" prop="telephone" required>
+        <el-form-item label="电话" label-width="60px" prop="telephone">
           <el-input v-model="etOnlineUserForm.telephone" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="邮箱" label-width="60px" prop="email" required>
+        <el-form-item label="邮箱" label-width="60px" prop="email">
           <el-input v-model="etOnlineUserForm.email" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="住宿信息" label-width="80px" prop="lodging" required>
+        <el-form-item label="住宿信息" label-width="80px" prop="lodging">
           <el-input v-model="etOnlineUserForm.lodging" auto-complete="off"></el-input>
         </el-form-item>
       </el-form>
@@ -144,44 +154,53 @@
   export default {
     data() {
       return {
-        action:"",
+        action: "",
         formOpen: true,
         title: '新增',
         uploadWindow: false,//导入弹窗默认关闭
         workId: 0,
-        fileList:[],
+        fileList: [],
         onlineActive: false,//确认完成
         etOnlineInfo: [],
         etOnlineUserWindow: false,
         pageSize: 10,
         total: 100,
         currentPage: 1,
+        deptList: [],//科室
+        responseDept: "",//科室id
         rules: {
-          userid: [
+          userCode: [
             {required: true, message: '请输入用户工号'},
             {min: 1, max: 10, message: '长度在 1 到 10 个字符'}
           ],
-          yhmc: [
+          cName: [
             {required: true, message: '请输入用户姓名'}
           ],
-          clo1: [
+          responseDept: [
             {required: true, message: '请输入用户所在部门'}
           ],
-          clo2: [
+          roleName: [
             {required: true, message: '请输入用户当前角色'}
           ],
-          mobile: [
-            {pattern: /^1[345789]\d{9}$/, message: '目前只支持中国大陆的手机号码'}
+          responseSite: [
+            {required: true, message: '请输入用户所在站点'}
+          ],
+          wechatNo: [
+            {message: '请输入微信号'}
+          ],
+          telephone: [
+            {required: true, pattern: /^1[345789]\d{9}$/, message: '目前只支持中国大陆的手机号码'}
           ],
           email: [
-            {pattern: /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/, message: '邮箱验证失败'}
+            {
+              // required: true,
+              pattern: /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/,
+              message: '邮箱验证失败'
+            }
           ],
-          product: [
-            {required: true, message: '请输入产品名称'}
+          lodging: [
+            {message: '请输入住宿信息'}
           ],
-          model: [
-            {required: true, message: '请输入模块名称'}
-          ]
         },
         etOnlineUserForm: {
           workId: 0,
@@ -219,14 +238,26 @@
       },
       //上线支持人员
       getEtOnlineUserInfo: function () {
-        var pageSize = this.pageSize;
-        var currentPage = this.currentPage;
-        var first = (currentPage - 1) * pageSize;
-        var pmId = this.$parent.getProjectId();
-        api.post(api.url.etOnlineUserInfo.initData, {'pmId': pmId, 'first': first, 'count': pageSize}).then((data) => {
-          //console.log(data);
+        let pageSize = this.pageSize;
+        let currentPage = this.currentPage;
+        let first = (currentPage - 1) * pageSize;
+        let pmId = this.$parent.getProjectId();
+        let serialNo = this.$parent.getCustomerId(); //医院用户按照客户信息来存储
+        api.post(api.url.etOnlineUserInfo.initData, {
+          'pmId': pmId,
+          'serialNo': serialNo,
+          'first': first,
+          'count': pageSize
+        }).then((data) => {
+          console.log(data);
           this.etOnlineInfo = data.rows;
           this.total = data.total;
+          this.deptList = data.deptList;
+          if (data.process.isSupportStaff != 1 || data.process.isEnd != 1) {
+            this.onlineActive = false;
+          } else if (data.process.isSupportStaff == 1 && data.process.isEnd == 1) {
+            this.onlineActive = true;
+          }
         });
       },
       //上传成功
@@ -298,6 +329,7 @@
         this.etOnlineUserForm.mobile = data.mobile;
         this.etOnlineUserForm.lodging = data.lodging;
         this.title = "修改";
+        this.responseDept = data.responseDept;
         this.etOnlineUserWindow = true;
       },
       openEtOnlineUserWindow: function () {
@@ -314,12 +346,21 @@
         this.etOnlineUserForm.wechatNo = '';
         this.etOnlineUserForm.lodging = '';
         this.etOnlineUserForm.email = '';
+        this.responseDept = "";
         this.etOnlineUserWindow = true;
+      },
+      //选择科室
+      doSelect(responseDept) {
+        this.etOnlineUserForm.responseDept = responseDept;
+        this.responseDept = responseDept;
       },
       openLineUploadWindow: function () {
         this.fileList = [];
         this.uploadWindow = true;
-        this.action = api.url.etOnlineUserInfo.uploadFile + '?pmId=' + this.$parent.getProjectId() + '&operator=' + this.$parent.getUserId();
+        this.action = api.url.etOnlineUserInfo.uploadFile
+          + '?pmId=' + this.$parent.getProjectId()
+          + '&operator=' + this.$parent.getUserId()
+          + '&serialNo=' + this.$parent.getCustomerId();
       },
       onlineAddOrModify: function (formName) { //增加或者修改数据
         var json = {
@@ -341,10 +382,10 @@
           if (valid) {
             api.post(api.url.etOnlineUserInfo.addOrModify, json).then((data) => {
               console.info(data);
-              if (data.status =='success') {
+              if (data.status == 'success') {
                 this.$message({type: 'success', message: '操作成功!'});
                 this.refreshPage();
-              }else {
+              } else {
                 this.$message({type: 'error', message: '工号重复，操作失败!'});
               }
             });
@@ -378,26 +419,51 @@
       downloadExcelLineUser: function () {
         window.open(api.url.etOnlineUserInfo.exportExcel + '?pmId=' + this.$parent.getProjectId());
       },
-      //上线支持人员工作确认完成
-      confirmOnLineUser: function () {
-        var pmId = this.$parent.getProjectId();
-        var operator = this.$parent.getUserId();
-        this.$confirm('此操作是用来确定上线支持人员工作完成，是否确定完成?', '提示', {
-          confirmButtonText: '是',
-          cancelButtonText: '否',
+      //确认完成
+      doConfirm: function () {
+        let pmId = this.$parent.getProjectId();
+        let confirmText = '';
+        let succMessage = '';
+        let calMessage = '';
+        let isSupportStaff = 0;
+        let isEnd = 0;
+        if (!this.onlineActive) {
+          confirmText = '此操作将确认上线支持人员工作完成, 是否继续?';
+          succMessage = '确认成功';
+          calMessage = '已取消确认';
+          isSupportStaff = 1;
+          isEnd = 1;
+        } else {
+          confirmText = '此操作将取消确认上线支持人员工作完成, 是否继续?';
+          succMessage = '取消成功';
+          calMessage = '已撤销取消';
+          isSupportStaff = 0;
+          isEnd = 0;
+        }
+        this.$confirm(confirmText, '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          api.post(api.url.etOnlineUserInfo.confirmUser, {'pmId': pmId, 'operator': operator}).then((data) => {
+          api.post(api.url.etOnlineUserInfo.confirmUser, {
+            pmId: pmId,
+            operator: this.$parent.getUserId(),
+            isSupportStaff: isSupportStaff,
+            isEnd: isEnd,
+          }).then((data) => {
             if (data.status == "success") {
-              this.$message({type: 'success', message: '确认完成!'});
-              this.onlineActive = true;
-              this.getEtOnlineUserInfo();
+              this.$message({type: 'success', message: succMessage});
+              if (!this.onlineActive) {
+                this.onlineActive = true;
+              } else {
+                this.onlineActive = false;
+              }
             }
           });
         }).catch(() => {
           this.$message({
-            type: 'info',
-            message: '已取消确认'
+            type: "info",
+            message: calMessage
           });
         });
       },

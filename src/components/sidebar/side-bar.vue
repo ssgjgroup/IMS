@@ -8,7 +8,7 @@
     <h2 @click="switchMenuSate" class="menu-state">
       <span :class="[isCollapse ? '':'open']"><i class="iconfont icon-menu"></i></span>
     </h2>
-    <el-menu default-active=""
+    <el-menu :default-active="menuIndex"
              background-color="#333744"
              text-color="#fff"
              active-text-color="#1e90ff"
@@ -17,6 +17,7 @@
              unique-opened
              @open="handleOpen"
              @close="handleClose"
+             @select="doSelect"
              :collapse="isCollapse">
       <el-submenu index="1">
         <template slot="title">
@@ -76,23 +77,40 @@
 <script>
   export default {
     //数据
-    data(){
+    data() {
       return {
         initData: {},
         isCollapse: false,
-        rouerState:true,
-        opened:false
+        rouerState: true,
+        opened: false,
+        menuIndex: window.localStorage.getItem('menuIndex'),
       }
-    },
+    }, created() {
+      let menuIndex = window.localStorage.getItem('menuIndex');
+      console.info('menuIndex:' + menuIndex);
+      if (menuIndex == null || menuIndex == '') {
+        this.menuIndex = '1-1';
+      } else {
+        this.menuIndex = menuIndex;
+      }
+
+    }
+    ,
     //方法
     methods: {
-      switchMenuSate:function () {
+      switchMenuSate: function () {
         this.isCollapse = !this.isCollapse;
-        this.$root.$emit('Get-Menu',this.isCollapse);
+        this.$root.$emit('Get-Menu', this.isCollapse);
       },
       handleOpen(key, keyPath) {
       },
       handleClose(key, keyPath) {
+      },
+      doSelect(index, indexPath) {
+        //缓存菜单栏index
+        window.localStorage.setItem('menuIndex', index);
+        // alert(document.URL);
+        this.menuIndex = index;
       }
     }
   }
@@ -100,39 +118,45 @@
 </script>
 <!--CSS-PAGE-->
 <style lang="stylus" scoped>
-  .side-menu{
+  .side-menu {
     position relative
     float left
     height 100%
     background-color #333744
     z-index 1
   }
-  .menu-state{
+
+  .menu-state {
     position relative
     height 60px
     background #222733
     cursor pointer
   }
-  .menu-state span{
+
+  .menu-state span {
     position absolute
     top 50%
     left 50%
-    transform translate(-50%,-50%)
+    transform translate(-50%, -50%)
   }
-  .menu-state span.open i{
+
+  .menu-state span.open i {
     transform rotate(270deg)
   }
-  .menu-state i{
+
+  .menu-state i {
     display inline-block
     font-size 20px
     transition all .5s ease
   }
-  .el-menu-item a{
+
+  .el-menu-item a {
     color #fff
     font-size 14px
     text-decoration none
   }
-  .iconfont{
+
+  .iconfont {
     color #fff
   }
 </style>
@@ -144,19 +168,23 @@
     min-height: 400px;
     overflow auto
   }
-  .el-submenu .el-menu-item{
+
+  .el-submenu .el-menu-item {
     min-width 180px !important
   }
+
   /*reset*/
-  ul.el-menu{
-    border-right:none!important;
+  ul.el-menu {
+    border-right: none !important;
   }
+
   /*pagination*/
-  .el-pager li{
-    color :#666;
+  .el-pager li {
+    color: #666;
     font-weight: normal;
   }
-  .el-pager li.active{
-    color :#3a9eff;
+
+  .el-pager li.active {
+    color: #3a9eff;
   }
 </style>

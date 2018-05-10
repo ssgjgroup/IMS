@@ -1,6 +1,6 @@
 <template xmlns:v-popover="http://www.w3.org/1999/xhtml">
   <div  class="ims-wrapper">
-    <SideBar></SideBar>
+    <SideBar id="sideBar"></SideBar>
     <div :class="[menuSate ? 'shrinkage':'','ims-content']">
       <div class="header">
         <el-select v-model="ward" id="pid"
@@ -247,6 +247,8 @@
             window.localStorage.removeItem('user');
             window.localStorage.removeItem('token');
             window.localStorage.removeItem('menu');
+            window.localStorage.removeItem('menuIndex');//删除菜单index缓存
+            location.reload();
             this.cleanPageData();
             this.$router.push('/');
           }
