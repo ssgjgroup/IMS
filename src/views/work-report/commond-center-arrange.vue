@@ -244,7 +244,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="lead = false">取 消</el-button>
-        <el-button type="primary" @click="exportPmisData('leadForm')" v-show="!importPmisStatus" >确 定</el-button>
+        <el-button type="primary" @click="exportPmisData('leadForm')" >导入PMIS</el-button>
       </div>
     </el-dialog>
   </div>

@@ -130,7 +130,9 @@
     </el-dialog>
     <!--文件上传弹窗-->
     <el-dialog title="文件上传" width="30%" :visible.sync="uploadWindow">
-      <el-upload class="upload-demo" :action="action" :on-preview="handlePreview" :on-remove="handleRemove" :on-success="uploadSeccess" :before-remove="beforeRemove" :before-upload="showChange" :limit="1" :on-exceed="handleExceed" :file-list="fileList">
+      <el-upload class="upload-demo" :action="action" :on-preview="handlePreview"
+                 :on-remove="handleRemove" :on-success="uploadSeccess" :before-remove="beforeRemove" :before-upload="showChange" :limit="1" :on-exceed="handleExceed"
+                 :file-list="fileList" :data="extraData">
         <el-button size="small" type="primary">点击上传</el-button>
         <div slot="tip" class="el-upload__tip">只能上传
           <span style="color:#F56C6C;">xls/xlsx/doc/docx文件</span>，文件大小不超过500kb</div>
@@ -177,13 +179,14 @@ export default {
           value: 11,
           label: '其他'
         }]
-      }, {
-        label: '是',
-        options: [{
-          value: 1,
-          label: '是'
-        }]
-      }],
+        }, {
+          label: '是',
+          options: [{
+            value: 1,
+            label: '是'
+          }]
+        }
+      ],
       pageSize: 5,
       total: 10,
       currentPage: 1,
@@ -225,13 +228,15 @@ export default {
           value: 11,
           label: '其他'
         }]
-      }, {
+      },
+        {
         label: '是',
         options: [{
           value: 1,
           label: '是'
         }]
-      }],
+      }
+      ],
       uploadWindow: false,
       fileList: [],
       action: api.url.businessProcess.upload,
@@ -240,7 +245,8 @@ export default {
       viewList: [],
       viewImageWindow: false,
       uploadFilePath: '',
-      flowCodeShow:false
+      flowCodeShow:false,
+      extraData:{} //上传额外的数据
     }
   },
   created() {
@@ -282,7 +288,8 @@ export default {
       });
       this.isManager = this.$store.state.userAuth;
       console.log(this.isManager);
-    }, checkUserAuth() { ///用户是否是项目经理
+    },
+    checkUserAuth() { ///用户是否是项目经理
       let json = {
         xmlcb: this.$parent.getProjectId(),
         ry: this.$parent.getUserId()
@@ -469,7 +476,13 @@ export default {
       }
     },
     openUploadWindow(id, uploadPath) {
-      this.action = api.url.businessProcess.upload + '?id=' + id;
+      this.action = api.url.businessProcess.upload;
+      this.extraData = {
+        id:id,
+        pmId: this.$parent.getProjectId(),
+        cId: this.$parent.getContractId(),
+        serialNo: this.$parent.getCustomerId()
+      };
       if (uploadPath && uploadPath !== "") {
         this.fileList = [{
           id: id,
@@ -506,7 +519,8 @@ export default {
         this.uploadWindow = false;
         this.initBusinessProcess();
       } else {
-        this.$message.warning(response.msg);
+        this.uploadWindow = false;
+        this.$message.error(response.msg);
       }
     },
     //移除上传文件
