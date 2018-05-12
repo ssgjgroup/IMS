@@ -34,7 +34,7 @@
             label="负责科室">
           </el-table-column>
           <el-table-column
-            prop="responseSite"
+            prop="map.site"
             label="站点">
           </el-table-column>
           <el-table-column
@@ -102,8 +102,15 @@
         <el-form-item label="角色" label-width="60px" prop="roleName">
           <el-input v-model="etOnlineUserForm.roleName" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="站点" label-width="60px" prop="responseSite">
-          <el-input v-model="etOnlineUserForm.responseSite" auto-complete="off"></el-input>
+        <el-form-item label="站点" label-width="85px" prop="responseSite">
+          <el-select v-model="responseSite" placeholder="请选择" @change="doSiteSelect(responseSite)">
+            <el-option
+              v-for="item in siteList"
+              :key="item.id"
+              :label="item.siteName"
+              :value="item.id.toString()">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="微信号" label-width="70px" prop="wechatNo">
           <el-input v-model="etOnlineUserForm.wechatNo" auto-complete="off"></el-input>
@@ -167,7 +174,9 @@
         total: 100,
         currentPage: 1,
         deptList: [],//科室
+        siteList: [],//站点
         responseDept: "",//科室id
+        responseSite: "",//站点id
         rules: {
           userCode: [
             {required: true, message: '请输入用户工号'},
@@ -182,9 +191,9 @@
           roleName: [
             {required: true, message: '请输入用户当前角色'}
           ],
-          responseSite: [
-            {required: true, message: '请输入用户所在站点'}
-          ],
+          // responseSite: [
+          //   {required: true, message: '请输入用户所在站点'}
+          // ],
           wechatNo: [
             {message: '请输入微信号'}
           ],
@@ -317,6 +326,13 @@
         if (this.$refs['etOnlineUserForm'] !== undefined) {
           this.$refs['etOnlineUserForm'].resetFields();
         }
+        //获取站点集合
+        api.post(api.url.etOnlineUserInfo.responseSiteList, {id: data.responseDept}).then((data) => {
+          if (data.status === 'success') {
+            console.info("siteList:" + data.siteList);
+            this.siteList = data.siteList;
+          }
+        });
         this.etOnlineUserForm.workId = data.id;
         this.etOnlineUserForm.userCode = data.userCode;
         this.etOnlineUserForm.cName = data.cName;
@@ -330,6 +346,7 @@
         this.etOnlineUserForm.lodging = data.lodging;
         this.title = "修改";
         this.responseDept = data.responseDept;
+        this.responseSite = data.responseSite;
         this.etOnlineUserWindow = true;
       },
       openEtOnlineUserWindow: function () {
@@ -347,12 +364,25 @@
         this.etOnlineUserForm.lodging = '';
         this.etOnlineUserForm.email = '';
         this.responseDept = "";
+        this.responseSite = "";
+        this.siteList = [];
         this.etOnlineUserWindow = true;
       },
       //选择科室
       doSelect(responseDept) {
         this.etOnlineUserForm.responseDept = responseDept;
         this.responseDept = responseDept;
+        api.post(api.url.etOnlineUserInfo.responseSiteList, {id: responseDept}).then((data) => {
+          if (data.status === 'success') {
+            console.info("siteList:" + data.siteList);
+            this.siteList = data.siteList;
+          }
+        });
+      },
+      //选在站点
+      doSiteSelect(responseSite) {
+        this.etOnlineUserForm.responseSite = responseSite;
+        this.responseSite = responseSite;
       },
       openLineUploadWindow: function () {
         this.fileList = [];

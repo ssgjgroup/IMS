@@ -167,7 +167,9 @@
         }],
         selectedOptions: [],//关联选项
         upLoadData: {//上传文件时传递的参数
-          id: ""
+          id: "",
+          pmId:this.$parent.getProjectId(),
+          operator: this.$parent.getUserId(),
         },
         action: api.url.easyDataCheck.uploadFile,//上传地址
         pageSize: 10,

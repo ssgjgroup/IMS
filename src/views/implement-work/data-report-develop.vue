@@ -292,7 +292,8 @@
         action: api.url.report.upload,
         upLoadData: {//上传文件时传递的参数
           id: "",
-          operator: ""//操作人
+          operator: "",//操作人
+          pmId: this.$parent.getProjectId(),
         },
         completeSelect: [
           {
@@ -603,7 +604,7 @@
       },
       beforeUpload(file) {
         console.info(file.name.substring(file.name.lastIndexOf(".") + 1));
-        const isJPG = file.name.substring(file.name.lastIndexOf(".") + 1) === 'png' || file.name.substring(file.name.lastIndexOf(".") + 1) === 'jpg' || file.name.substring(file.name.lastIndexOf(".") + 1) === 'bmp'||file.name.substring(file.name.lastIndexOf(".") + 1) === 'jpeg';
+        const isJPG = file.name.substring(file.name.lastIndexOf(".") + 1) === 'png' || file.name.substring(file.name.lastIndexOf(".") + 1) === 'jpg' || file.name.substring(file.name.lastIndexOf(".") + 1) === 'bmp' || file.name.substring(file.name.lastIndexOf(".") + 1) === 'jpeg';
         if (!isJPG) {
           this.$message.error('只能上传图片格式!');
         }

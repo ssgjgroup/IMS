@@ -322,7 +322,7 @@
                 <el-table-column
                   label="操作">
                   <template slot-scope="scope">
-                    <div class="operate" v-show="showOperation(scope.row)">
+                    <div class="operate" v-show="showOperation(scope.row)&& !isActive">
                       <i class="iconfont icon-edit" @click="openInterfaceInfoWindow(scope.row)"></i>
                       <i class="iconfont icon-delete" @click="deleteInterfaceInfo(scope.row.id)"></i>
                     </div>

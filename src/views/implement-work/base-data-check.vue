@@ -104,6 +104,7 @@
         upLoadData: {//上传文件时传递的参数
           id: "",
           operator: this.$parent.getUserId(),
+          pmId:this.$parent.getProjectId(),
         },
         isActive: false,
         process: {},

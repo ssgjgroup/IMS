@@ -86,6 +86,7 @@ const url = {
     exportExcel: baseUrl + 'vue/onlineUser/exportExcel.do', //导出Excel
     uploadFile: baseUrl + 'vue/onlineUser/upload.do', //上传
     deleteUser: baseUrl + 'vue/onlineUser/delete.do', //删除
+    responseSiteList: baseUrl + 'vue/onlineUser/responseSiteList.do', //二级联动获取站点
     confirmUser: baseUrl + 'vue/onlineUser/confirm.do' //确认任务完成
   },
   //客户明细信息
