@@ -155,7 +155,8 @@
               <h2 class="project-online_title">上传照片</h2>
             </el-col>
             <el-col :md="24" :lg="24">
-              <el-upload :action="switchAction" list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="deleteSwitchImg" :file-list="switchImgFile">
+              <el-upload :action="switchAction" list-type="picture-card" :on-preview="handlePictureCardPreview" :on-remove="deleteSwitchImg" :file-list="switchImgFile"
+                         :data="extraData">
                 <i class="el-icon-plus"></i>
               </el-upload>
               <el-dialog :visible.sync="dialogVisible">
@@ -180,7 +181,7 @@
     </el-dialog>
     <!--文件上传弹窗-->
     <el-dialog title="文件上传" width="30%" :visible.sync="uploadWindow">
-      <el-upload class="upload-demo" :action="mockAction" :on-remove="handleRemove" :on-success="uploadSeccess" :limit="1" :file-list="fileList">
+      <el-upload class="upload-demo" :action="mockAction" :on-remove="handleRemove" :on-success="uploadSeccess" :limit="1" :file-list="fileList" :data="extraData">
         <el-button size="small" type="primary">点击上传</el-button>
         <div slot="tip" class="el-upload__tip">文件大小不超过500kb</div>
       </el-upload>
@@ -263,7 +264,8 @@ export default {
       switchFile: [], //切换方案
       switchImgFile: [], //切换方案图片
       dialogImageUrl: '',
-      dialogVisible: false
+      dialogVisible: false,
+      extraData:{}
     }
   },
   created() {
@@ -296,8 +298,14 @@ export default {
     },
     //初始化切换图片上传action
     initSwitchImgAction() {
-      this.switchAction = api.url.onLineReport.upload + '?operator=' + this.$parent.getUserId() + '&fileType=' + 4 + '&serialNo=' + this.$parent.getCustomerId() + '&pmId=' + this.$parent.getProjectId()
-        + '&cId=' + this.$parent.getContractId();
+      this.switchAction = api.url.onLineReport.upload;
+      this.extraData = {
+        operator: this.$parent.getUserId() ,
+        fileType:4 ,
+        serialNo:this.$parent.getCustomerId(),
+        pmId:this.$parent.getProjectId(),
+        cId:this.$parent.getContractId()
+      };
     },
     initWorkStatus(type) {
       let json = {
@@ -426,8 +434,15 @@ export default {
     },
     //============================上线可行性报告=======================================//
     initUploadAction() {
-      this.switchAction = api.url.onLineReport.upload + '?operator=' + this.$parent.getUserId() + '&fileType=' + id + '&serialNo=' + this.$parent.getCustomerId() + '&pmId=' + this.$parent.getProjectId()
-        + '&cId=' + this.$parent.getContractId();
+      this.switchAction = api.url.onLineReport.upload;
+      this.extraData = {
+        operator: this.$parent.getUserId() ,
+        fileType:4 ,
+        serialNo:this.$parent.getCustomerId(),
+        pmId:this.$parent.getProjectId(),
+        cId:this.$parent.getContractId()
+      };
+
     },
     initOnlineReport() {
       let json = {
@@ -672,10 +687,20 @@ export default {
     openUploadWindow(id, mockForm) {
       this.fileList = [];
       if (this.activeName === 'first') {
-        this.mockAction = api.url.simulateRecord.upload + '?id=' + id + '&operator=' + this.$parent.getUserId();
+        this.mockAction = api.url.simulateRecord.upload;
+        this.extraData = {
+          operator: this.$parent.getUserId() ,
+          id:id
+        };
       } else {
-        this.mockAction = api.url.onLineReport.upload + '?operator=' + this.$parent.getUserId() + '&fileType=' + id + '&serialNo=' + this.$parent.getCustomerId() + '&pmId=' + this.$parent.getProjectId()
-          + '&cId=' + this.$parent.getContractId();
+        this.mockAction = api.url.onLineReport.upload;
+        this.extraData = {
+          operator: this.$parent.getUserId() ,
+          fileType:id ,
+          serialNo:this.$parent.getCustomerId(),
+          pmId:this.$parent.getProjectId(),
+          cId:this.$parent.getContractId()
+        };
       }
       if (mockForm) {
         this.modifySimulateInfo(mockForm, 0);
