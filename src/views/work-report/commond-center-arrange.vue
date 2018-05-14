@@ -10,9 +10,13 @@
         <!--<span ><i class="iconfont icon-to-lead"></i>确认完成</span>-->
         <span @click="chart= true;">
           <i class="iconfont icon-job-weight"></i>工作比重</span>
+        <span @click="openBatchImportPmisWindow">
+           <i  class="iconfont icon-to-lead"></i>批量导入PMIS
+        </span>
+
       </div>
       <div class="w-table-content">
-        <el-table :data="commondTableData" style="width: 100%" @cell-mouse-enter="showInfo">
+        <el-table :data="commondTableData" style="width: 100%" @cell-mouse-enter="showInfo" @select="showSelectRow">
           <el-table-column type="selection" align="center" width="55" prop="id">
           </el-table-column>
           <el-table-column prop="siteName" label="站点名称" align="center">
@@ -104,7 +108,7 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :xs="12" :sm="12" :md="12" :lg="12">
+          <el-col :xs="12" :sm="12" :md="12" :lg="12" >
             <el-form-item label="问题优先级" label-width="120px" prop="priority" required>
               <el-select v-model="leadForm.priority" placeholder="请选择">
                 <el-option v-for="item in selectData.priority" :key="item.dictSort" :label="item.dictLabel" :value="item.dictV">
@@ -183,7 +187,7 @@
             </el-form-item>
           </el-col>
         </el-row>
-        <el-row>
+        <el-row  >
           <el-col :xs="12" :sm="12" :md="12" :lg="12">
             <el-form-item label="提出人" label-width="120px" prop="createYHMC">
               <el-input v-model="leadForm.createYHMC" auto-complete="off" :disabled="true"
@@ -214,7 +218,7 @@
             </el-form-item>
           </el-col>
         </el-row>
-        <el-row>
+        <el-row >
           <el-col :xs="12" :sm="12" :md="12" :lg="12">
             <el-form-item label="解决方式" label-width="120px" prop="operType">
               <el-select v-model="leadForm.operType" placeholder="请选择">
@@ -244,7 +248,139 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="lead = false">取 消</el-button>
-        <el-button type="primary" @click="exportPmisData('leadForm')" >导入PMIS</el-button>
+        <el-button type="primary" @click="exportPmisData('leadForm')" v-show="!importPmisStatus" >导入PMIS</el-button>
+      </div>
+    </el-dialog>
+
+    <el-dialog title="批量导入PMIS" width="40%" :visible.sync="leadBatch">
+      <el-form :model="leadForm" :rules="leadRules" ref="leadForm">
+        <el-row>
+          <el-col :xs="12" :sm="12" :md="12" :lg="12">
+            <el-form-item label="批次" label-width="120px" prop="batchNo" required>
+              <el-select v-model="leadForm.batchNo" placeholder="请选择">
+                <el-option v-for="item in selectData.batchNo" :key="item.value" :label="item.label" :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :xs="12" :sm="12" :md="12" :lg="12">
+            <el-form-item label="问题类别" label-width="120px" prop="questionType" required>
+              <el-select v-model="leadForm.questionType" placeholder="请选择">
+                <el-option v-for="item in selectData.questionType" :key="item.dictSort" :label="item.dictLabel" :value="item.dictV">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+
+          <el-col :xs="12" :sm="12" :md="12" :lg="12">
+            <el-form-item label="原因分类" label-width="120px" prop="reasonType" required>
+              <el-select v-model="leadForm.reasonType" placeholder="请选择">
+                <el-option v-for="item in selectData.reasonType" :key="item.dictSort" :label="item.dictLabel" :value="item.dictV">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :xs="12" :sm="12" :md="12" :lg="12">
+            <el-form-item label="底稿状态" label-width="120px" prop="manuscriptStatus" required>
+              <el-select v-model="leadForm.manuscriptStatus" placeholder="请选择">
+                <el-option v-for="item in selectData.manuscriptStatus" :key="item.dictSort" :label="item.dictLabel" :value="item.dictV">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :xs="12" :sm="12" :md="12" :lg="12">
+            <el-form-item label="难度" label-width="120px" prop="diffcultLevel" required>
+              <el-select v-model="leadForm.diffcultLevel" placeholder="请选择">
+                <el-option v-for="item in selectData.diffcultLevel" :key="item.dictSort" :label="item.dictLabel" :value="item.dictV">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :xs="12" :sm="12" :md="12" :lg="12">
+            <el-form-item label="工程师工号" label-width="120px" prop="devUser" required>
+              <el-autocomplete
+                class="inline-input"
+                v-model="leadForm.devUser"
+                value-key="name"
+                value="yhmc"
+                :fetch-suggestions="querySearch"
+                placeholder="请输入工程师工号"
+                :trigger-on-focus="false"
+                @select="changeDevUserName"
+              ></el-autocomplete>
+            </el-form-item>
+          </el-col>
+          <el-col :xs="12" :sm="12" :md="12" :lg="12">
+            <el-form-item label="公司方接收人" label-width="120px" prop="devUserName" required>
+              <el-input v-model="leadForm.devUserName" auto-complete="off" :disabled="true"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :xs="12" :sm="12" :md="12" :lg="12">
+            <el-form-item label="联系人" label-width="120px" prop="linkman">
+              <el-input v-model="leadForm.linkman" auto-complete="off" placeholder="请输入联系人"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :xs="12" :sm="12" :md="12" :lg="12">
+            <el-form-item label="联系电话" label-width="120px" prop="mobile">
+              <el-input v-model="leadForm.mobile" auto-complete="off" placeholder="请输入联系电话"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :xs="12" :sm="12" :md="12" :lg="12">
+            <el-form-item label="希望完成日期" label-width="120px" prop="hopeFinishDate" required>
+              <el-date-picker v-model="leadForm.hopeFinishDate" type="date"
+                              placeholder="选择希望完成日期">
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
+          <el-col :xs="12" :sm="12" :md="12" :lg="12">
+            <el-form-item label="解决日期" label-width="120px" prop="resolveDate">
+              <el-date-picker v-model="leadForm.resolveDate" type="date"
+                              value-format="yyyy-MM-dd" placeholder="选择解决日期">
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row >
+          <el-col :xs="12" :sm="12" :md="12" :lg="12">
+            <el-form-item label="解决方式" label-width="120px" prop="operType">
+              <el-select v-model="leadForm.operType" placeholder="请选择">
+                <el-option v-for="item in selectData.operType" :key="item.dictSort" :label="item.dictLabel" :value="item.dictV">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :xs="12" :sm="12" :md="12" :lg="12">
+            <el-form-item label="解决结果" label-width="120px" prop="solutionResult">
+              <el-input v-model="leadForm.solutionResult" auto-complete="off" placeholder="请输入解决结果"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :xs="12" :sm="12" :md="12" :lg="12">
+            <el-form-item label="预估工作量" label-width="120px" prop="workload" >
+              <el-input v-model="leadForm.workload" auto-complete="off" placeholder="请输入预估工作量"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-form-item label="确认意见" label-width="120px" prop="userMessage">
+            <el-input v-model="leadForm.userMessage" type="textarea" auto-complete="off"></el-input>
+          </el-form-item>
+        </el-row>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="leadBatch = false">取 消</el-button>
+        <el-button type="primary" @click="exportBatchPmisData('leadForm')" >导入PMIS</el-button>
       </div>
     </el-dialog>
   </div>
@@ -345,7 +481,9 @@ export default {
           { required: true, message: '请选择希望完成日期' }
         ]
       },
-      importPmisStatus:false
+      importPmisStatus:false,
+      leadBatch:false,
+      selectData:[]
     }
   },
   created() {
@@ -546,6 +684,7 @@ export default {
       }
     },
     openImportPmisWindow(data) {
+      this.importBatch = false;
       if (this.$refs['leadForm'] !== undefined) {
         this.$refs['leadForm'].resetFields();
       }
@@ -647,7 +786,78 @@ export default {
     changeDevUserName(item){
       this.leadForm.devUser = item.userid;
       this.leadForm.devUserName = item.yhmc;
-    }
+    },
+    openBatchImportPmisWindow(){
+      console.log(this.selectData);
+      if(this.selectData.length <=0 ){
+        this.$message({ type: 'warning', message: '请先选择导入PMIS的数据' });
+        return ;
+      }
+      if (this.$refs['leadForm'] !== undefined) {
+        this.$refs['leadForm'].resetFields();
+      }
+      this.leadForm.batchNo = 1;
+      this.leadForm.questionType = 1;
+      this.leadForm.reasonType = 1;
+      this.leadForm.manuscriptStatus = 1;
+      this.leadForm.diffcultLevel = 1;
+      this.leadForm.devUser = '';
+      this.leadForm.devUserName = '';
+      this.leadForm.linkman = '';
+      this.leadForm.mobile = '';
+      this.leadForm.hopeFinishDate = '';
+      this.leadForm.resolveDate = '';
+      this.leadForm.operType = 1;
+      this.leadForm.solutionResult = '';
+      this.leadForm.userMessage = '';
+      this.leadForm.workload = 0;
+      this.importPmisStatus = 1;
+      this.leadBatch = true;
+    },
+    showSelectRow(selection,row){
+      this.selectData = selection;
+    },
+    exportBatchPmisData(formName) {
+      let idList = [];
+      for( let i = 0;i < this.selectData.length ;i++ ){
+        idList[i] = this.selectData[i].id;
+      }
+      console.log(idList);
+      let json = {
+        pmId : this.$parent.getProjectId(),
+        batchNo: this.leadForm.batchNo,
+        questionType: this.leadForm.questionType,
+        reasonType: this.leadForm.reasonType,
+        manuscriptStatus: this.leadForm.manuscriptStatus,
+        diffcultLevel: this.leadForm.diffcultLevel,
+        devUser: this.leadForm.devUser,
+        devUserName: this.leadForm.devUserName,
+        linkman: this.leadForm.linkman,
+        mobile: this.leadForm.mobile,
+        solutionResult: this.leadForm.solutionResult,
+        hopeFinishDate: lisUtils.dateFormat.date(this.leadForm.hopeFinishDate),
+        resolveDate:lisUtils.dateFormat.date(this.leadForm.resolveDate),
+        workload:this.leadForm.workload === undefined ? 0: this.leadForm.workload,
+        userMessage: this.leadForm.userMessage === '' ? '无' : this.leadForm.userMessage,
+        operator: this.$parent.getUserId(),
+        idList:idList
+      };
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          console.log(json);
+          api.post(api.url.siteCenter.exportBatchPmisData, json).then((data) => {
+            if (data.status == 'success') {
+              this.initCenterData();
+              this.$message({ type: 'info', message: '导入PMIS成功' });
+            }
+          });
+          this.leadBatch = false;
+        } else {
+          return false;
+        }
+      });
+      console.log(json);
+    },
   }
 }
 

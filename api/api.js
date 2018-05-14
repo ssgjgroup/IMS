@@ -217,6 +217,7 @@ const url = {
     updateEchart: baseUrl + 'vue/siteCenter/updateChart.do', //更新饼图数据
     update: baseUrl + 'vue/siteCenter/update.do',
     exportPmisData: baseUrl + 'vue/siteCenter/exportPmisData.do',
+    exportBatchPmisData: baseUrl + 'vue/siteCenter/exportBatchPmisData.do',
     imagePath: imageUrl + 'shareFolder' //图片路径
   },
   //楼层问题
