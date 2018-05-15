@@ -303,13 +303,13 @@
               <el-table
                 :data="interfaceInfoData"
                 style="width: 100%">
-                <el-table-column
-                  prop="productName"
-                  label="产品名称">
-                </el-table-column>
+                <!--<el-table-column-->
+                  <!--prop="productName"-->
+                  <!--label="产品名称">-->
+                <!--</el-table-column>-->
                 <el-table-column
                   prop="interfaceName"
-                  label="模块名称">
+                  label="接口名称">
                 </el-table-column>
                 <el-table-column
                   prop="moduleDetail"
@@ -356,13 +356,14 @@
             <!--</el-option>-->
             <!--</el-select>-->
             <!--</el-form-item>-->
-            <el-form-item label="产品名称" label-width="80px" prop="productName" required>
-              <el-input v-model="interfaceInfoForm.productName" auto-complete="off"></el-input>
-            </el-form-item>
-            <el-form-item label="模块名称" label-width="80px" prop="interfaceName">
+
+            <!--<el-form-item label="产品名称" label-width="80px" prop="productName" required>-->
+              <!--<el-input v-model="interfaceInfoForm.productName" auto-complete="off"></el-input>-->
+            <!--</el-form-item>-->
+            <el-form-item label="接口名称" label-width="80px" prop="interfaceName">
               <el-input v-model="interfaceInfoForm.interfaceName" auto-complete="off"></el-input>
             </el-form-item>
-            <el-form-item label="模块明细" label-width="80px" prop="moduleDetail">
+            <el-form-item label="接口明细" label-width="80px" prop="moduleDetail">
               <el-input v-model="interfaceInfoForm.moduleDetail" auto-complete="off"></el-input>
             </el-form-item>
             <el-form-item label="备注信息" label-width="80px" prop="remark">
