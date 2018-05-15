@@ -280,8 +280,6 @@
         var first = (currentPage - 1) * pageSize;
         api.post(api.url.softHardware.initData, {'first': first, 'count': pageSize, 'pmId': pmId}).then((data) => {
           if (data.status == 'success') {
-            console.info(data);
-            console.info(this.$parent.getProjectId());
             this.workerInfo = data.rows;
             this.total = data.total;
             this.plList = data.plList;
@@ -309,7 +307,6 @@
       numChange(row) {
         this.$nextTick(() => {
           let num = row.num;
-          console.info(num);
           api.post(api.url.softHardware.numChange, {
             id: row.id,
             num: num,
@@ -326,8 +323,6 @@
       },
       //选择范围
       doRangeSelect(range, id) {
-        console.info("noScopeCode:" + range);
-        console.info("id:" + id);
         //改变范围
         api.post(api.url.softHardware.changeScope, {
           'noScopeCode': range,
@@ -339,7 +334,6 @@
       },
       //完成情况
       completeChange(row) {
-        console.info(row.content);
         api.post(api.url.softHardware.changeContent, {
           'content': row.content,
           'id': row.id,
@@ -350,7 +344,6 @@
       },
       //是否可操作
       showCol: function (data) {
-        console.info(data.creator);
         if (data.creator != 0) {
           return true;
         } else {
@@ -370,7 +363,6 @@
         if (this.$refs['workForm'] !== undefined) {
           this.$refs['workForm'].resetFields();
         }
-        console.info(data);
         if (data == 0) {
           this.workForm.map.plName = "";
           this.workForm.hwName = "";
@@ -479,13 +471,10 @@
         };
       },
       handlePreview(file) {
-        console.log(file);
       },
       handleRemove(file, fileList) {
-        console.log(file, fileList);
       },
       uploadSeccess: function (response) {
-        console.log(response);
         if (response.status == 'success') {
           this.fileList = [];
           this.uploadWindow = false;

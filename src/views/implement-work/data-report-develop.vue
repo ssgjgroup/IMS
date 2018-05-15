@@ -60,15 +60,17 @@
           @cell-mouse-enter="getSelectRow"
           style="width: 100%">
           <el-table-column
+            width="150px"
             prop="map.type"
             label="分类">
           </el-table-column>
           <el-table-column
+            width="150px"
             prop="reportName"
             label="票据&报表名称">
           </el-table-column>
           <el-table-column
-            align="center"
+            width="150px"
             label="是否本期范围">
             <template slot-scope="scope">
               <el-select size="mini"
@@ -91,12 +93,12 @@
             </template>
           </el-table-column>
           <el-table-column
+            width="400px"
             prop="require"
-            label="要求">
+            label="备注">
           </el-table-column>
           <el-table-column
             prop="status"
-            align="center"
             :disabled="!isManager"
             label="审核状态">
 
@@ -215,7 +217,7 @@
         <!--<el-radio label="2">审核不通过</el-radio>-->
         <!--</el-radio-group>-->
         <!--</el-form-item>-->
-        <el-form-item label="" prop="require" label="要求">
+        <el-form-item label="" prop="require" label="备注">
           <el-input type="textarea" v-model="workForm.require"></el-input>
         </el-form-item>
       </el-form>
@@ -346,7 +348,7 @@
         rules: {
           reportType: {required: true, message: '请选择分类', trigger: 'change'},
           reportName: {required: true, message: '请输入票据报表名称', trigger: 'blur'},
-          require: {required: true, message: '请输入要求', trigger: 'blur'},
+          // require: {required: true, message: '请输入要求', trigger: 'blur'},
         },
         action: api.url.report.upload,
         workerInfo: [],
@@ -389,7 +391,6 @@
           pmId: pmId,
           userId: this.$parent.getUserId(),
         }).then((data) => {
-          console.info(data);
           if (data.status == 'success') {
             this.workerInfo = data.rows;
             this.total = data.total;
@@ -402,7 +403,6 @@
             } else if (data.user.ryfl == 0) {
               this.isManager = true;
             }
-            console.info("isManager:" + this.isManager);
             if (this.process.isPaperAffirm == null || this.process.isPaperAffirm != 1) {
               this.isActive = false;
             } else if (this.process.isPaperAffirm == 1) {
@@ -438,7 +438,6 @@
                 name: imgData[i].substring(imgData[i].lastIndexOf('/') + 1, imgData[i].lastIndexOf('.'))
               };
             }
-            console.log(this.imgPath);
             this.picShow = true;
           } else {
             this.$alert('未上传图片!', '提示', {
@@ -477,7 +476,6 @@
       },
       //完成情况
       completeChange(row) {
-        console.info(row.content);
         api.post(api.url.report.changeContent, {
           'content': row.content,
           'id': row.id,
@@ -488,7 +486,6 @@
       },
       //是否可操作
       showCol: function (data) {
-        console.info(data.creator);
         if (data.creator != 0) {
           return true;
         } else {
@@ -508,7 +505,6 @@
         if (this.$refs['workForm'] !== undefined) {
           this.$refs['workForm'].resetFields();
         }
-        console.info(data);
         if (data == 0) {
           this.workForm.reportType = "";
           this.workForm.reportName = "";
@@ -611,17 +607,14 @@
         return isJPG;
       },
       handlePreview(file) {
-        console.log(file);
       },
       handleRemove(file, fileList) {
-        console.log(file, fileList);
       },
       handlePictureCardPreview(file) {
         this.dialogImageUrl = file.url;
         this.dialogVisible = true;
       },
       uploadSeccess: function (response) {
-        console.log(response);
         if (response.status == 'success') {
           this.fileList = [];
           this.uploadWindow = false;

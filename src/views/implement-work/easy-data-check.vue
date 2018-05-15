@@ -211,14 +211,12 @@
         this.pmId = this.$parent.getProjectId();
         //获取operator
         let operator = this.$parent.getUserId();
-        console.log("projectId:" + this.pmId);
         api.post(api.url.easyDataCheck.initData, {
           'first': first,
           'count': pageSize,
           pmId: this.pmId,
           operator: operator
         }).then((data) => {
-          console.log(data);
           this.checkTableData = data.rows;
           this.total = data.total;
           this.process = data.process;
@@ -266,15 +264,12 @@
       }
       ,
       handlePreview(file) {
-        console.log(file);
       }
       ,
       handleRemove(file, fileList) {
-        console.log(file, fileList);
       }
       ,
       uploadSeccess: function (response) {
-        console.log(response);
         if (response.status == 'success') {
           this.fileList = [];
           this.uploadWindow = false;
@@ -298,7 +293,6 @@
       },
       //级联选择器
       handleChange(isUse) {
-        console.log(isUse);
         alert(this.selectedOptions);
         if (isUse == 1) {
           //维护,更新isUse字段
@@ -332,8 +326,6 @@
       },
       //选择范围
       doRangeSelect(range, id) {
-        console.info("noScopeCode:" + range);
-        console.info("id:" + id);
         //改变范围
         api.post(api.url.easyDataCheck.changeScope, {
           'noScopeCode': range,

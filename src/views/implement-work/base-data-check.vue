@@ -146,14 +146,12 @@
         this.pmId = this.$parent.getProjectId();
         //获取userId
         let operator = this.$parent.getUserId();
-        console.log("projectId:" + this.pmId);
         api.post(api.url.dataCheck.initData, {
           'first': first,
           'count': pageSize,
           pmId: this.pmId,
           operator: operator
         }).then((data) => {
-          console.log(data);
           this.checkTableData = data.rows;
           this.total = data.total;
           this.process = data.process;
@@ -177,7 +175,6 @@
         this.look = true;
         this.workId = data;
         api.post(api.url.dataCheck.detail, {id: data}).then((data) => {
-          console.log(data);
           this.gridData = data.data;
         });
       },
@@ -200,13 +197,10 @@
         };
       },
       handlePreview(file) {
-        console.log(file);
       },
       handleRemove(file, fileList) {
-        console.log(file, fileList);
       },
       uploadSeccess: function (response) {
-        console.log(response);
         if (response.status == 'success') {
           this.fileList = [];
           this.uploadWindow = false;

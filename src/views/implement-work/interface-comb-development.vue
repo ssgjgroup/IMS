@@ -314,7 +314,6 @@
           pmId: this.pmId,
           userId: this.$parent.getUserId(),
         }).then((data) => {
-          console.log(data);
           this.interfaceTableData = data.rows;
           this.total = data.total;
           this.plList = data.plList;
@@ -327,7 +326,6 @@
           } else if (data.user.ryfl == 0) {
             this.isManager = true;
           }
-          console.info("isManager:" + this.isManager);
           if (this.process.isInterfaceAffirm == null || this.process.isInterfaceAffirm != 1) {
             this.isActive = false;
           } else if (this.process.isInterfaceAffirm == 1) {
@@ -352,7 +350,6 @@
       },
       //是否可操作
       showCol: function (data) {
-        console.info(data.creator);
         if (data.creator != 0) {
           return true;
         } else {
@@ -364,7 +361,6 @@
         if (this.$refs['workForm'] !== undefined) {
           this.$refs['workForm'].resetFields();
         }
-        console.info(data);
         if (data == 0) {
           this.workForm.productName = "";
           this.workForm.interfaceName = "";
@@ -380,12 +376,10 @@
           this.workId = data.id;
           this.reason = data.noScopeCode.toString();
         }
-        console.info(this.workForm.plId);
         this.workderInforWindow = true;
       },
       //完成情况
       completeChange(row) {
-        console.info(row.map.contentList.toString());
         this.$nextTick(() => {
           api.post(api.url.thirdInterface.changeContent, {
             'contentType': row.map.contentList.toString(),

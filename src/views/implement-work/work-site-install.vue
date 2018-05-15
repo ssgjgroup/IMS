@@ -806,7 +806,7 @@
       },
       //图片上传
       UploadUrl:function(detailId){
-        return api.url.workSiteInstall.uploadFileSite+"?operator="+this.$parent.getUserId()+"&id="+detailId;
+        return api.url.workSiteInstall.uploadFileSite+"?operator="+this.$parent.getUserId()+"&id="+detailId+'&pmId='+this.$parent.getProjectId();
       },
 
       //图片删除

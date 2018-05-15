@@ -258,7 +258,6 @@
           'first': first,
           'count': pageSize
         }).then((data) => {
-          console.log(data);
           this.etOnlineInfo = data.rows;
           this.total = data.total;
           this.deptList = data.deptList;
@@ -286,7 +285,6 @@
       //展示
       handlePreview(file) {
         //console.log(file);
-        console.log(file, fileList);
       },
       //限制文件
       handleExceed(files, fileList) {
@@ -329,7 +327,6 @@
         //获取站点集合
         api.post(api.url.etOnlineUserInfo.responseSiteList, {id: data.responseDept}).then((data) => {
           if (data.status === 'success') {
-            console.info("siteList:" + data.siteList);
             this.siteList = data.siteList;
           }
         });
@@ -374,7 +371,6 @@
         this.responseDept = responseDept;
         api.post(api.url.etOnlineUserInfo.responseSiteList, {id: responseDept}).then((data) => {
           if (data.status === 'success') {
-            console.info("siteList:" + data.siteList);
             this.siteList = data.siteList;
           }
         });
@@ -411,7 +407,6 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             api.post(api.url.etOnlineUserInfo.addOrModify, json).then((data) => {
-              console.info(data);
               if (data.status == 'success') {
                 this.$message({type: 'success', message: '操作成功!'});
                 this.refreshPage();

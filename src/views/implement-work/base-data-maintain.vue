@@ -309,7 +309,6 @@
     },
     methods: {
       tabSwitch: function (tab, event) {
-        console.log(tab, event);
         this.activeName = tab.name;
         this.getWorkerInfo();
       },
@@ -338,7 +337,6 @@
         var first = (currentPage - 1) * pageSize;
         //获取项目id
         this.pmId = this.$parent.getProjectId();
-        console.log("projectId:" + this.pmId);
         if (this.activeName == "first") {
           //国标数据
           this.dataType = "0";
@@ -355,7 +353,6 @@
           pmId: this.pmId,
           dataType: this.dataType
         }).then((data) => {
-          console.log(data);
           this.workerInfo = data.rows;
           this.total = data.total;
           this.process = data.process;
@@ -382,7 +379,6 @@
         this.workId = data.id;
         this.lookTile = data.tableName;
         api.post(api.url.basicData.detail, {id: data.id}).then((data) => {
-          console.log(data);
           this.gridData = data.data;
         });
       },
@@ -393,13 +389,10 @@
       },
       //上传数据
       handlePreview(file) {
-        console.log(file);
       },
       handleRemove(file, fileList) {
-        console.log(file, fileList);
       },
       uploadSeccess: function (response) {
-        console.log(response);
         if (response.status == 'success') {
           this.fileList = [];
           this.uploadWindow = false;
@@ -416,7 +409,6 @@
       },
       //导出表的所有数据
       exportDataInfo: function () {
-        console.log(this.workId);
         window.open(api.url.basicData.exportDataInfo + "?id=" + this.workId);
       },
       //导出sql文件
@@ -435,7 +427,6 @@
       },
       //增加或者修改数据
       addOrModify: function (formName) {
-        console.log(formName);
         var json = {
           id: this.workId,
           tableCode: this.workForm.tableCode,
@@ -468,7 +459,6 @@
             pmId: this.pmId,
             dataType: this.dataType
           }).then((data) => {
-            console.log(data);
             type = data.type;
             message = data.msg;
             this.$message({
