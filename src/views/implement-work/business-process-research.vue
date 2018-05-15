@@ -89,10 +89,10 @@
           <el-table-column align="center" label="操作">
             <template slot-scope="scope">
               <div class="operate">
-                <i @click="openUploadWindow(scope.row.id,scope.row.uploadPath)" class="iconfont icon-conf-complete"></i>
-                <i @click="downloadPage(scope.row.downloadPath)" class="iconfont icon-download"></i>
-                <i v-show="showOperation(scope.row)" @click="modifyProcess(scope.row)" class="iconfont icon-edit"></i>
-                <i @click="downloadPage(scope.row.uploadPath)" class="iconfont icon-to-lead"></i>
+                <i title="上传文件" @click="openUploadWindow(scope.row.id,scope.row.uploadPath)" class="iconfont icon-conf-complete"></i>
+                <i title="导出模板" @click="downloadPage(scope.row.downloadPath)" class="iconfont icon-download"></i>
+                <i title="编辑流程" v-show="showOperation(scope.row)" @click="modifyProcess(scope.row)" class="iconfont icon-edit"></i>
+                <i title="下载文件" @click="downloadPage(scope.row.uploadPath)" class="iconfont icon-to-lead"></i>
               </div>
             </template>
           </el-table-column>
