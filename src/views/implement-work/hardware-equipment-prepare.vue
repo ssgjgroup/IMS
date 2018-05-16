@@ -90,6 +90,10 @@
               </el-select>
             </template>
           </el-table-column>
+          <el-table-column prop="map.creator" label="创建人" width="100px">
+          </el-table-column>
+          <el-table-column prop="map.createDate" label="创建时间" width="100px">
+          </el-table-column>
           <el-table-column
             align="center"
             label="操作">

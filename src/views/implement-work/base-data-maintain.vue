@@ -258,7 +258,7 @@
         isActive: false,
         formLabelWidth: '120px',
         pageSize: 10,
-        total: 100,
+        total: 0,
         currentPage: 1,
         process: {},
         look: false,//详情弹出框默认影藏
@@ -355,6 +355,7 @@
         }).then((data) => {
           this.workerInfo = data.rows;
           this.total = data.total;
+          console.info("total:",this.total);
           this.process = data.process;
           if (this.process.isBasicDataUse == null || this.process.isBasicDataUse != 1) {
             this.isActive = false;

@@ -60,17 +60,17 @@
           @cell-mouse-enter="getSelectRow"
           style="width: 100%">
           <el-table-column
-            width="150px"
+
             prop="map.type"
             label="分类">
           </el-table-column>
           <el-table-column
-            width="150px"
+
             prop="reportName"
             label="票据&报表名称">
           </el-table-column>
           <el-table-column
-            width="150px"
+
             label="是否本期范围">
             <template slot-scope="scope">
               <el-select size="mini"
@@ -93,15 +93,10 @@
             </template>
           </el-table-column>
           <el-table-column
-            width="400px"
-            prop="require"
-            label="备注">
-          </el-table-column>
-          <el-table-column
             prop="status"
+
             :disabled="!isManager"
             label="审核状态">
-
             <template slot-scope="scope">
               <el-dropdown :hide-on-click="false" placement="bottom-start" trigger="click">
                 <span class="el-dropdown-link">
@@ -141,6 +136,15 @@
               </el-dropdown>
             </template>
 
+          </el-table-column>
+
+          <el-table-column prop="map.creator" label="创建人" width="100px">
+          </el-table-column>
+          <el-table-column prop="map.createDate" label="创建时间" width="100px">
+          </el-table-column>
+          <el-table-column
+            label="备注"
+            prop="require">
           </el-table-column>
           <el-table-column
             align="center"
