@@ -55,6 +55,8 @@
           </el-table-column>
            <el-table-column prop="map.creator" label="创建人" width="100px">
           </el-table-column>
+          <el-table-column prop="map.createDate" label="创建时间" width="100px">
+          </el-table-column>
           <el-table-column prop="state" align="center" label="审核状态" :disabled="isActive">
             <template slot-scope="scope">
               <el-dropdown :hide-on-click="false" placement="bottom-start" trigger="click" v-show="!isConfig">
