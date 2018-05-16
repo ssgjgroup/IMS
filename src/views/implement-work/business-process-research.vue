@@ -42,6 +42,7 @@
           </el-table-column>
           <el-table-column prop="flowName" label="流程名称">
           </el-table-column>
+
           <el-table-column align="center" label="是否本期范围">
             <template slot-scope="scope">
               <el-select size="mini" v-model="scope.row.isScope" @change="changeScope" :disabled="isActive" placeholder="请选择">
@@ -51,6 +52,8 @@
                 </el-option-group>
               </el-select>
             </template>
+          </el-table-column>
+           <el-table-column prop="map.creator" label="创建人" width="100px">
           </el-table-column>
           <el-table-column prop="state" align="center" label="审核状态" :disabled="isActive">
             <template slot-scope="scope">
